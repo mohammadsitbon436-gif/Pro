@@ -1,3 +1,1200 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+/* H.cw Quartz phase 1 — no changes to Quartz Markdown rendering. */
+.hcw-site-nav,
+.hcw-site-nav * { box-sizing: border-box; }
+.hcw-site-nav {
+  position: sticky; top: 0; z-index: 100; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 0 clamp(16px, 5vw, 74px);
+  background: color-mix(in srgb, var(--light) 95%, transparent);
+  border-bottom: 1px solid var(--lightgray);
+  backdrop-filter: blur(16px);
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.hcw-site-nav a { text-decoration: none; background: none; }
+.hcw-brand { display: flex; align-items: center; gap: 9px; color: var(--dark) !important; font-size: 19px; font-weight: 750; white-space: nowrap; }
+.hcw-logo { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 9px; color: #fff; font-size: 12px; background: linear-gradient(140deg,#3e76ea,#62c9b8); }
+.hcw-site-links { display: flex; align-items: center; gap: 4px; }
+.hcw-nav-link { padding: 9px 13px; border-radius: 10px; color: var(--darkgray) !important; font-size: 14px; font-weight: 580; white-space: nowrap; }
+.hcw-nav-link:hover,.hcw-nav-link.active { color: var(--secondary) !important; background: var(--highlight); }
+@media(max-width:720px) {
+  .hcw-site-nav { height: auto; min-height: 64px; flex-wrap: wrap; padding: 11px 16px; }
+  .hcw-site-links { width: 100%; justify-content: space-between; overflow-x: auto; gap: 2px; }
+  .hcw-nav-link { padding: 8px 7px; font-size: 12px; }
+}
+
+/* Hide the optional graph on note pages; preserve Explorer, Search and TOC. */
+.sidebar.right .graph { display: none; }
+
+/* Standalone pages: keep native Quartz processing but remove its reading chrome. */
+body[data-slug="index"], body[data-slug="about"], body[data-slug="同行者"], body[data-slug="connect"] { --hcw-ink:#1e293b; }
+body[data-slug="index"] .page,
+body[data-slug="about"] .page,
+body[data-slug="同行者"] .page,
+body[data-slug="connect"] .page { max-width: none; }
+body[data-slug="index"] .page > #quartz-body,
+body[data-slug="about"] .page > #quartz-body,
+body[data-slug="同行者"] .page > #quartz-body,
+body[data-slug="connect"] .page > #quartz-body {
+  display: block; padding: 0; margin: 0; width: 100%;
+}
+body[data-slug="index"] #quartz-body > .sidebar,
+body[data-slug="about"] #quartz-body > .sidebar,
+body[data-slug="同行者"] #quartz-body > .sidebar,
+body[data-slug="connect"] #quartz-body > .sidebar,
+body[data-slug="index"] #quartz-body > footer,
+body[data-slug="about"] #quartz-body > footer,
+body[data-slug="同行者"] #quartz-body > footer,
+body[data-slug="connect"] #quartz-body > footer,
+body[data-slug="index"] #quartz-body .page-header,
+body[data-slug="about"] #quartz-body .page-header,
+body[data-slug="同行者"] #quartz-body .page-header,
+body[data-slug="connect"] #quartz-body .page-header,
+body[data-slug="index"] #quartz-body .center > hr,
+body[data-slug="about"] #quartz-body .center > hr,
+body[data-slug="同行者"] #quartz-body .center > hr,
+body[data-slug="connect"] #quartz-body .center > hr,
+body[data-slug="index"] #quartz-body .page-footer,
+body[data-slug="about"] #quartz-body .page-footer,
+body[data-slug="同行者"] #quartz-body .page-footer,
+body[data-slug="connect"] #quartz-body .page-footer { display: none !important; }
+body[data-slug="index"] #quartz-body .center,
+body[data-slug="about"] #quartz-body .center,
+body[data-slug="同行者"] #quartz-body .center,
+body[data-slug="connect"] #quartz-body .center { width: 100%; max-width: none; min-width: 0; margin: 0; }
+body[data-slug="index"] #quartz-body .center > article,
+body[data-slug="about"] #quartz-body .center > article,
+body[data-slug="同行者"] #quartz-body .center > article,
+body[data-slug="connect"] #quartz-body .center > article { max-width: none; margin: 0; padding: 0; }
+/* Markdown may create an empty top-level title: avoid duplicate headings. */
+body[data-slug="index"] #quartz-body .center > article > h1:first-child,
+body[data-slug="about"] #quartz-body .center > article > h1:first-child,
+body[data-slug="同行者"] #quartz-body .center > article > h1:first-child,
+body[data-slug="connect"] #quartz-body .center > article > h1:first-child { display:none; }
+
+/* Home: V5 gradient hero. */
+body[data-slug="index"] .hcw-site-nav,
+body[data-slug="connect"] .hcw-site-nav { color:#f5f7fb; background: rgba(11,14,19,.96); border-color:#ffffff18; }
+body[data-slug="index"] .hcw-brand,
+body[data-slug="connect"] .hcw-brand,
+body[data-slug="index"] .hcw-nav-link,
+body[data-slug="connect"] .hcw-nav-link { color: #e7ecf3 !important; }
+body[data-slug="index"] .hcw-nav-link:hover,
+body[data-slug="connect"] .hcw-nav-link:hover,
+body[data-slug="index"] .hcw-nav-link.active,
+body[data-slug="connect"] .hcw-nav-link.active { color:#fff !important; background:#ffffff1b; }
+.hcw-home { isolation:isolate; position:relative; overflow:hidden; min-height:calc(100vh - 72px); display:flex; justify-content:center; align-items:center; background:#0a0d12; color:#fff; text-align:center; }
+.hcw-home::before { content:""; position:absolute; inset:-9%; z-index:-2; background: radial-gradient(ellipse 24% 52% at 54% 13%,#ffce6da8,transparent 83%),radial-gradient(ellipse 37% 45% at 51% 50%,#7ad9b5a5,transparent 86%),radial-gradient(ellipse 43% 33% at 44% 79%,#3396f2c4,transparent 88%),radial-gradient(ellipse 42% 24% at 66% 83%,#1c55e6a1,transparent 80%); filter:blur(28px); animation:hcw-breathe 16s ease-in-out infinite alternate; }
+.hcw-home::after { content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(ellipse 85% 96% at 50% 45%,transparent 7%,#080b0de8 100%); }
+.hcw-home-inner { padding: 70px 22px 95px; max-width:1050px; }
+.hcw-eyebrow { font-size:12px; letter-spacing:.26em; color:#b8d8ee; font-weight:700; margin-bottom:29px; }
+.hcw-home h1 { font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color:white !important; margin:0; line-height:1.3; font-size:clamp(40px,5.5vw,80px); font-weight:750; letter-spacing:-.055em; }
+.hcw-home h1 span { display:inline-block; background:#316de9; border-radius:13px; padding:3px 17px 8px; white-space:nowrap; color:#fff; box-shadow:0 8px 34px #145cff6a; }
+.hcw-home-subtitle { color:#f0f6ff !important; font-weight:600; font-size:clamp(16px,1.8vw,23px); letter-spacing:.09em; margin:28px 0 13px; }
+.hcw-home-desc { color:#d4e0ec !important; line-height:1.95; font-size:15px; margin:0; }
+.hcw-home-actions { display:flex; gap:13px; justify-content:center; flex-wrap:wrap; margin-top:35px; }
+.hcw-home .hcw-btn { border-radius:11px; padding:11px 23px; font-size:14px; font-weight:650; text-decoration:none; transition:transform .2s; }
+.hcw-home .hcw-btn:hover { transform:translateY(-2px); }
+.hcw-btn-primary { background:#fff; color:#172237 !important; }
+.hcw-btn-outline { background:#ffffff18; color:#fff !important; border:1px solid #ffffff88; }
+.hcw-home-sign { margin-top:92px; color:#d5e1edac; font-size:12px; letter-spacing:.14em; }
+@keyframes hcw-breathe { from{transform:scale(1)} to{transform:scale(1.09) translateY(10px)} }
+@media(prefers-reduced-motion:reduce){.hcw-home::before{animation:none}}
+
+/* About: academic profile, V5 two-column structure. */
+.hcw-about,.hcw-peers { font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; color:var(--hcw-ink); background:#fff; }
+.hcw-about { display:grid; grid-template-columns:315px minmax(0,1fr); gap:clamp(32px,6vw,100px); max-width:1190px; padding:75px 30px 105px; margin:auto; }
+.hcw-profile-aside { min-width:0; }
+.hcw-portrait { height:305px; border-radius:22px; display:grid; place-items:center; background:radial-gradient(circle at 75% 23%,#d8ebe8,transparent 37%),linear-gradient(145deg,#e3ebef,#98b6c0 52%,#5e788e); }
+.hcw-portrait span { color:#fff; font-weight:800; font-size:62px; text-shadow:0 4px 21px #2734494d; }
+.hcw-profile-aside h1 { font-size:32px; text-align:center; margin:20px 0 3px; }
+.hcw-profile-aside .hcw-profile-role { text-align:center; color:#ad8050; font-weight:680; margin:0; }
+.hcw-profile-aside .hcw-profile-caption { text-align:center; color:#6f7d8d; font-size:13px; }
+.hcw-interest { border:1px solid #e9eff3; background:#f2f7f9; border-radius:16px; padding:21px; margin-top:27px; }
+.hcw-interest p { line-height:2; margin:7px 0 0; color:#556274; font-size:13px; }
+.hcw-about-main > small,.hcw-peers > small,.hcw-peers section > small { display:block; color:#b18a5b; letter-spacing:.15em; font-size:11px; font-weight:700; }
+.hcw-about-main > h2 { margin:8px 0 18px; font-size:31px; }
+.hcw-about-main > p { font-size:15px; color:#576478; line-height:2.1; }
+.hcw-about-main > h2:not(:first-of-type) { margin-top:55px; }
+.hcw-interest-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:19px; }
+.hcw-interest-grid > div { border:1px solid #e4ebf1; border-radius:15px; background:#fbfcfe; padding:21px; }
+.hcw-interest-grid small { color:#a37b4c; font-size:11px; }
+.hcw-interest-grid h3 { margin:9px 0 6px; font-size:17px; }
+.hcw-interest-grid p { font-size:13px; color:#647083; line-height:1.85; margin:0; }
+.hcw-placeholder { font-size:12px !important; color:#8490a0 !important; margin:18px 0; }
+
+/* Peers: student-focused, static sample without invented identities. */
+.hcw-peers { max-width:1150px; margin:0 auto; padding:75px 32px 110px; }
+.hcw-peers > h1 { font-size:clamp(40px,4vw,62px); margin:12px 0 8px; }
+.hcw-soft-dot { color:#bac7d4; }
+.hcw-peers-lead { font-size:22px; font-weight:650; color:#26394d !important; margin:8px 0; }
+.hcw-peers-intro { max-width:780px; color:#6d7888 !important; line-height:2; }
+.hcw-peers-tabs { display:flex; flex-wrap:wrap; gap:10px; margin:25px 0 60px; }
+.hcw-peers-tabs a { background:#eef3f8; border:1px solid #e2e9f0; color:#53677a; padding:9px 15px; border-radius:999px; font-size:13px; }
+.hcw-peers section { padding:26px 0 47px; border-bottom:1px solid #e6ebf0; }
+.hcw-peers section h2 { font-size:29px; margin:8px 0 20px; }
+.hcw-student { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:40px; align-items:center; padding:clamp(24px,4vw,49px); border-radius:23px; background:linear-gradient(120deg,#f7f1e5,#eef5f9); border:1px solid #e9e9e8; }
+.hcw-student .hcw-student-kicker { font-size:11px; font-weight:800; letter-spacing:.15em; color:#9a784b; }
+.hcw-student h3 { margin:10px 0 20px; font-size:35px; }
+.hcw-student dl { margin:0; }
+.hcw-student dl > div { display:grid; grid-template-columns:105px 1fr; gap:9px; padding:12px 0; border-bottom:1px solid #b5c1c655; }
+.hcw-student dt { font-size:13px; color:#697789; }
+.hcw-student dd { margin:0; font-size:14px; font-weight:580; color:#334457; }
+.hcw-student-photo { width:100%; aspect-ratio:1; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,#dbe4e8,#a7b7c5); color:white; font-size:21px; letter-spacing:.2em; box-shadow:0 13px 35px #25354a1b; }
+.hcw-peers section > p { color:#687789; line-height:2; }
+
+/* Connect: minimal dark social page. */
+.hcw-connect { min-height:calc(100vh - 72px); background:#232323; display:grid; place-items:center; color:#f1f2f4; text-align:center; padding:60px 22px; font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; }
+.hcw-connect-inner { max-width:580px; }
+.hcw-connect-avatar { margin:0 auto 28px; width:205px; height:205px; display:grid; place-items:center; border-radius:50%; color:#f2f7f9; font-size:69px; font-weight:800; background:linear-gradient(140deg,#334c67,#97b9b2 52%,#2a4160); box-shadow:0 17px 45px #0005; }
+.hcw-connect h1 { color:#fff !important; font-size:34px; margin:0 0 12px; }
+.hcw-connect p { color:#e5e7eb !important; line-height:1.9; font-weight:600; }
+.hcw-socials { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:28px; }
+.hcw-socials a,.hcw-socials span { color:#fff; font-size:13px; border:1px solid #ffffff67; border-radius:999px; padding:9px 15px; }
+.hcw-socials a:hover { background:#ffffff25; }
+.hcw-socials span { opacity:.48; cursor:not-allowed; }
+.hcw-connect .hcw-connect-tip { font-size:12px; font-weight:400; color:#9fa8b3 !important; margin-top:34px; }
+
+/* Responsive adjustments */
+@media(max-width:820px) {
+  .hcw-about { grid-template-columns:1fr; max-width:660px; gap:36px; padding:42px 22px 76px; }
+  .hcw-portrait { max-width:315px; margin:auto; }
+  .hcw-student { grid-template-columns:1fr; }
+  .hcw-student-photo { width:min(260px,100%); margin:auto; grid-row:1; }
+  .hcw-peers { padding:42px 22px 77px; }
+}
+@media(max-width:520px) {
+  .hcw-interest-grid { grid-template-columns:1fr; }
+  .hcw-home h1 span { white-space:normal; }
+  .hcw-home-sign { margin-top:56px; }
+  .hcw-student dl > div { grid-template-columns:90px 1fr; }
+}
+
+/* ==========================================
+   H.cw 小屋：科研笔记目录
+   ========================================== */
+
+/* 隐藏 Explorer 中的网站功能页面 */
+
+.explorer .explorer-ul > li:has(
+  > a.nav-file-title[href$="/about"]
+),
+.explorer .explorer-ul > li:has(
+  > a.nav-file-title[href$="/connect"]
+),
+.explorer .explorer-ul > li:has(
+  > a.nav-file-title[href$="/同行者"]
+),
+.explorer .explorer-ul > li:has(
+  > a.nav-file-title[href$="/系列笔记"]
+) {
+  display: none !important;
+}
+
+
+/* ==========================================
+   H.cw · 同行者横向学生卡片 (B 方案)
+   仅影响 .hcw-peers / .hcw-peer-dialog
+   ========================================== */
+.hcw-peers .hcw-peers-section-heading {
+  display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap;
+  gap:18px; margin-bottom:23px;
+}
+.hcw-peers .hcw-peers-section-heading h2 { margin:8px 0 0; }
+.hcw-peers .hcw-peers-section-heading small { color:#b18a5b; letter-spacing:.15em; font-size:11px; font-weight:700; }
+.hcw-peers .hcw-peers-controls { display:flex; align-items:center; gap:9px; }
+.hcw-peers .hcw-peers-count { font-size:12px; letter-spacing:.08em; color:#8290a0; min-width:69px; white-space:nowrap; }
+.hcw-peers button.hcw-peers-arrow {
+  appearance:none; display:grid; place-items:center; width:43px; height:43px;
+  border:1px solid #dce4ed; border-radius:50%; background:#fff; color:#283e56;
+  font:600 23px/1 sans-serif; cursor:pointer; transition:background .18s, transform .18s;
+}
+.hcw-peers button.hcw-peers-arrow:hover:not(:disabled) { background:#eaf2f8; transform:translateY(-1px); }
+.hcw-peers button.hcw-peers-arrow:disabled { opacity:.33; cursor:not-allowed; }
+.hcw-peers .hcw-peers-rail {
+  display:flex; gap:17px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory;
+  scroll-padding-inline:2px; scroll-behavior:smooth; overscroll-behavior-inline:contain;
+  -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:7px 2px 24px;
+}
+.hcw-peers .hcw-peers-rail::-webkit-scrollbar { display:none; }
+.hcw-peers .hcw-peers-rail:focus-visible { outline:2px solid #357de4; outline-offset:4px; }
+.hcw-peers button.hcw-peer-card {
+  appearance:none; text-align:left; flex:0 0 calc((100% - 34px) / 3); min-width:0;
+  display:flex; flex-direction:column; padding:25px 23px 20px;
+  border:1px solid #e1e8f0; border-radius:20px;
+  background:linear-gradient(148deg,#f9fcff,#fff 55%,#f8f5ef);
+  color:#263649; box-shadow:0 9px 28px #2139540a;
+  scroll-snap-align:start; cursor:pointer; font-family:inherit;
+  transition:transform .2s, border-color .2s, box-shadow .2s;
+}
+.hcw-peers button.hcw-peer-card:hover { transform:translateY(-4px); border-color:#a9c9dd; box-shadow:0 13px 30px #2139541a; }
+.hcw-peers button.hcw-peer-card:focus-visible,
+.hcw-peers button.hcw-peers-arrow:focus-visible { outline:3px solid #357de4; outline-offset:3px; }
+.hcw-peers .hcw-peer-visual {
+  display:grid; place-items:center; width:92px; height:92px; flex:0 0 auto;
+  border-radius:50%; overflow:hidden; margin:0 auto 20px;
+  background:linear-gradient(140deg,#c1dbe1,#87a4bd); color:white;
+  font-size:12px; letter-spacing:.06em; font-weight:700;
+}
+.hcw-peers .hcw-peer-visual img { width:100%; height:100%; object-fit:cover; }
+.hcw-peers .hcw-peer-label { font-size:10px; font-weight:780; letter-spacing:.18em; color:#a68a6c; margin:0 0 8px; }
+.hcw-peers .hcw-peer-name { font-size:24px; line-height:1.45; color:#25374c; font-weight:750; margin:0 0 17px; }
+.hcw-peers .hcw-peer-meta { display:grid; gap:10px; margin:0 0 19px; }
+.hcw-peers .hcw-peer-meta > div { display:grid; gap:4px; }
+.hcw-peers .hcw-peer-meta dt { font-size:11px; color:#8795a3; }
+.hcw-peers .hcw-peer-meta dd { font-size:13px; line-height:1.6; color:#364a60; font-weight:600; margin:0; overflow-wrap:anywhere; }
+.hcw-peers .hcw-peer-more { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:auto; padding-top:15px;
+  border-top:1px solid #e6ebf0; font-size:12px; color:#657d97; }
+.hcw-peers .hcw-peer-more b { font-size:19px; font-weight:500; }
+.hcw-peers .hcw-peers-guide { margin:0; font-size:12px; color:#8a96a5; }
+.hcw-peers .hcw-peers-loading { margin:0; padding:25px 8px; color:#7a8795; }
+.hcw-peers .hcw-peers-demo { margin:14px 0 0; padding:10px 14px; background:#fbf4df; border:1px solid #eedfa8;
+  border-radius:10px; font-size:12px; color:#8c6b29; }
+.hcw-peers .hcw-peers-demo[hidden] { display:none; }
+.hcw-peer-dialog {
+  position:fixed; inset:0; box-sizing:border-box; width:min(830px,calc(100% - 32px));
+  max-height:min(88vh,880px); margin:auto; padding:36px;
+  border:1px solid #dce6ed; border-radius:23px; background:#fff; color:#283a4e;
+  box-shadow:0 25px 90px #10273a55; font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+}
+.hcw-peer-dialog::backdrop { background:#112235a6; backdrop-filter:blur(4px); }
+.hcw-peer-dialog .hcw-peer-dialog-close { position:absolute; top:13px; right:14px; width:38px; height:38px; border-radius:50%;
+  border:1px solid #e1e8ef; background:#fff; color:#43596d; font:500 25px/1 sans-serif; cursor:pointer; }
+.hcw-peer-dialog .hcw-peer-dialog-close:hover { background:#f0f5f8; }
+.hcw-peer-dialog .hcw-peer-dialog-close:focus-visible { outline:3px solid #357de4; outline-offset:2px; }
+.hcw-peer-dialog .hcw-peer-detail-head { display:grid; grid-template-columns:180px minmax(0,1fr); gap:32px; align-items:center; margin:0 20px 25px 0; }
+.hcw-peer-dialog .hcw-peer-detail-visual { width:180px; height:180px; border-radius:50%; overflow:hidden; display:grid; place-items:center;
+  background:linear-gradient(140deg,#c1dbe1,#87a4bd); color:#fff; font-weight:700; font-size:13px; }
+.hcw-peer-dialog .hcw-peer-detail-visual img { width:100%; height:100%; object-fit:cover; }
+.hcw-peer-dialog .hcw-peer-detail-kicker { margin:0 0 8px; color:#a38662; font-size:11px; font-weight:750; letter-spacing:.15em; }
+.hcw-peer-dialog h2#hcw-peer-modal-name { margin:0 0 12px; color:#283b51; font-size:clamp(28px,3.5vw,40px); }
+.hcw-peer-dialog .hcw-peer-detail-intro { color:#5e6d7d; line-height:1.8; margin:0; }
+.hcw-peer-dialog .hcw-peer-detail-meta { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; margin:22px 0; }
+.hcw-peer-dialog .hcw-peer-detail-meta > div { padding:14px 16px; background:#f6f9fb; border:1px solid #e9edf1; border-radius:11px; }
+.hcw-peer-dialog .hcw-peer-detail-meta dt { color:#8391a1; font-size:12px; margin-bottom:7px; }
+.hcw-peer-dialog .hcw-peer-detail-meta dd { color:#33495c; margin:0; font-size:14px; line-height:1.75; overflow-wrap:anywhere; }
+.hcw-peer-dialog .hcw-peer-detail-copy { padding-top:8px; color:#5f6c79; font-size:14px; line-height:1.95; }
+.hcw-peer-dialog .hcw-peer-detail-copy h3 { color:#2d4357; font-size:16px; margin:14px 0 5px; }
+.hcw-peer-dialog .hcw-peer-detail-copy p { margin:0 0 15px; white-space:pre-line; }
+@media(max-width:900px) { .hcw-peers button.hcw-peer-card { flex-basis:calc((100% - 17px)/2); } }
+@media(max-width:610px) {
+  .hcw-peers button.hcw-peer-card { flex-basis:85%; padding:21px 19px; }
+  .hcw-peers .hcw-peers-section-heading { align-items:center; }
+  .hcw-peers .hcw-peers-controls { margin-left:auto; }
+  .hcw-peer-dialog { padding:53px 22px 24px; }
+  .hcw-peer-dialog .hcw-peer-detail-head { grid-template-columns:1fr; gap:17px; justify-items:center; text-align:center; margin-right:0; }
+  .hcw-peer-dialog .hcw-peer-detail-visual { width:130px; height:130px; }
+  .hcw-peer-dialog .hcw-peer-detail-meta { grid-template-columns:1fr; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .hcw-peers .hcw-peers-rail { scroll-behavior:auto; }
+  .hcw-peers button.hcw-peer-card { transition:none; }
+}
+
+/* ============================================
+   H.cw 同行者 · 人物详情双栏弹窗（v2）
+   左侧完整资料 / 右侧大幅圆形照片
+   仅覆盖旧详情弹窗样式，不改卡片轮播与其他栏目
+   ============================================ */
+.hcw-peer-dialog {
+  width: min(1100px, calc(100% - 24px));
+  max-width: none;
+  max-height: calc(100dvh - 36px);
+  min-height: min(535px, calc(100dvh - 36px));
+  padding: 52px 56px;
+  border: 0;
+  border-radius: 32px;
+  overflow: auto;
+  color: #303847;
+  background: radial-gradient(circle at 99% 93%, #eef5f9 0, #fff 38%, #fffdfa 100%);
+  box-sizing: border-box;
+}
+.hcw-peer-dialog::backdrop {
+  background: #1d2734b8;
+  backdrop-filter: blur(5px);
+}
+.hcw-peer-dialog .hcw-peer-dialog-close {
+  z-index: 2;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  font-size: 25px;
+  color: #4a596c;
+}
+.hcw-peer-dialog [data-hcw-detail] { width: 100%; }
+.hcw-peer-dialog .hcw-peer-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.38fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 66px);
+  min-height: 430px;
+}
+.hcw-peer-dialog .hcw-peer-detail-info { min-width: 0; }
+.hcw-peer-dialog .hcw-peer-detail-kicker {
+  margin: 0 0 15px;
+  color: #948063;
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: .19em;
+  font-weight: 760;
+}
+.hcw-peer-dialog h2#hcw-peer-modal-name {
+  margin: 0 0 28px;
+  font-size: clamp(30px, 3.5vw, 42px);
+  line-height: 1.26;
+  font-weight: 780;
+  letter-spacing: .02em;
+  color: #293342;
+}
+.hcw-peer-dialog .hcw-peer-detail-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 13px;
+  margin: 0 0 31px;
+  padding: 0;
+  font-size: 16px;
+}
+.hcw-peer-dialog .hcw-peer-detail-meta > div {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+}
+.hcw-peer-dialog .hcw-peer-detail-meta dt {
+  margin: 0;
+  color: #84909e;
+  font-size: 15px;
+  line-height: 1.65;
+  font-weight: 400;
+}
+.hcw-peer-dialog .hcw-peer-detail-meta dd {
+  margin: 0;
+  color: #364255;
+  font-size: 15px;
+  line-height: 1.75;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.hcw-peer-dialog .hcw-peer-detail-copy {
+  margin: 0;
+  padding: 0;
+  color: #677688;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.hcw-peer-dialog .hcw-peer-detail-copy p {
+  margin: 0 0 10px;
+  line-height: inherit;
+  white-space: pre-line;
+}
+.hcw-peer-dialog .hcw-peer-detail-message { color: #748396; }
+.hcw-peer-dialog .hcw-peer-detail-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 6px 0 0;
+}
+.hcw-peer-dialog .hcw-peer-detail-visual {
+  width: min(100%, 365px);
+  height: auto;
+  aspect-ratio: 1;
+  border: 7px solid #edf2f5;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: clamp(48px, 7vw, 90px);
+  font-family: Georgia, serif;
+  font-weight: 700;
+  background: linear-gradient(140deg, #c4d2d8, #9fadb5);
+  box-shadow: 0 22px 52px #36475919;
+}
+.hcw-peer-dialog .hcw-peer-detail-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hcw-peer-dialog .hcw-peer-detail-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 17px 0 4px;
+  padding: 8px 18px;
+  border: 1px solid #e3e9ee;
+  border-radius: 999px;
+  color: #607080;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.hcw-peer-dialog .hcw-peer-detail-upload:hover { background: #eef4f8; }
+.hcw-peer-dialog .hcw-peer-detail-upload:focus-within { outline: 2px solid #357de4; outline-offset: 3px; }
+.hcw-peer-dialog .hcw-peer-detail-upload input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+}
+.hcw-peer-dialog .hcw-peer-detail-upload-note {
+  margin: 0;
+  color: #9ba7b4;
+  font-size: 11px;
+}
+@media (max-width: 760px) {
+  .hcw-peer-dialog {
+    width: calc(100% - 20px);
+    max-height: calc(100dvh - 20px);
+    padding: 57px 27px 31px;
+    border-radius: 23px;
+    min-height: 0;
+  }
+  .hcw-peer-dialog .hcw-peer-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    min-height: 0;
+  }
+  .hcw-peer-dialog .hcw-peer-detail-media { grid-row: 1; }
+  .hcw-peer-dialog .hcw-peer-detail-visual { width: min(58vw, 250px); }
+  .hcw-peer-dialog .hcw-peer-detail-meta { grid-template-columns: 1fr; }
+  .hcw-peer-dialog h2#hcw-peer-modal-name { margin-bottom: 23px; }
+}
+@media (max-width: 430px) {
+  .hcw-peer-dialog .hcw-peer-detail-meta > div {
+    grid-template-columns: 91px minmax(0, 1fr);
+    gap: 7px;
+  }
+  .hcw-peer-dialog .hcw-peer-detail-meta dt,
+  .hcw-peer-dialog .hcw-peer-detail-meta dd { font-size: 14px; }
+  .hcw-peer-dialog .hcw-peer-detail-visual { width: min(58vw, 204px); }
+}
+
+
+/* ================================================================
+   H.cw · 同行者 · 辅导介绍与真实反馈 v1
+   只影响 #support / #feedback；不改轮播、学生详情弹窗、其他页面
+   ================================================================ */
+.hcw-peers #support.hcw-support-section,
+.hcw-peers #feedback.hcw-feedback-section {
+  scroll-margin-top: 104px;
+}
+.hcw-peers #support.hcw-support-section {
+  margin-top: 32px;
+  padding: 68px 44px 54px;
+  border: 1px solid #e6edf3;
+  border-radius: 30px;
+  background: linear-gradient(150deg, #f8fafc 0%, #f5f8fb 57%, #f7f3eb 100%);
+}
+.hcw-peers .hcw-section-intro {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  align-items: end;
+  gap: 28px 50px;
+  margin-bottom: 27px;
+}
+.hcw-peers .hcw-section-intro small {
+  display: block;
+  color: #ab8960;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .19em;
+}
+.hcw-peers .hcw-section-intro h2 {
+  margin: 9px 0 0;
+  font-size: clamp(27px, 3vw, 36px);
+  line-height: 1.32;
+  letter-spacing: -.015em;
+  color: #27364a;
+}
+.hcw-peers .hcw-section-intro > p {
+  margin: 0 0 2px;
+  color: #617185;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.95;
+}
+.hcw-peers .hcw-support-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.hcw-peers .hcw-support-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 236px;
+  box-sizing: border-box;
+  padding: 26px 26px 24px;
+  border: 1px solid #e5eaf0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 8px 22px #263f5510;
+}
+.hcw-peers .hcw-support-index {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #b08f65;
+  font: 700 12px/1.2 "Segoe UI", sans-serif;
+  letter-spacing: .12em;
+}
+.hcw-peers .hcw-support-index span { color: #c5d2df; font-size: 19px; font-weight: 400; }
+.hcw-peers .hcw-support-card h3 {
+  margin: 18px 0 8px;
+  color: #293b50;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.hcw-peers .hcw-support-card > p {
+  flex-grow: 1;
+  margin: 0;
+  color: #647489;
+  font-size: 13px;
+  line-height: 1.85;
+}
+.hcw-peers .hcw-support-tag {
+  display: inline-block;
+  align-self: start;
+  margin-top: 20px;
+  color: #7e91a3;
+  font-size: 11px;
+  letter-spacing: .02em;
+}
+.hcw-peers .hcw-support-footnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 23px;
+  color: #708093;
+}
+.hcw-peers .hcw-support-footnote > span { font-size: 16px; color: #a68b64; }
+.hcw-peers .hcw-support-footnote p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #708093;
+}
+.hcw-peers #feedback.hcw-feedback-section {
+  padding: 84px 0 40px;
+  border-bottom: 0;
+}
+.hcw-peers .hcw-feedback-heading { margin-bottom: 25px; }
+.hcw-peers .hcw-feedback-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 90px;
+  align-items: center;
+  gap: 14px;
+  min-height: 260px;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 37px 47px 40px;
+  border: 1px solid #e1e9ef;
+  border-radius: 27px;
+  background: radial-gradient(circle at 95% 10%, #edf5f7 0, transparent 40%), linear-gradient(125deg, #faf8f3 0%, #fff 48%, #f2f7fa 100%);
+}
+.hcw-peers .hcw-feedback-quote {
+  align-self: start;
+  color: #b8a183;
+  font-family: Georgia, serif;
+  font-size: 100px;
+  line-height: 1;
+}
+.hcw-peers .hcw-feedback-text { position: relative; z-index: 1; min-width: 0; }
+.hcw-peers .hcw-feedback-label {
+  color: #ae9476;
+  font-size: 10px;
+  letter-spacing: .16em;
+  font-weight: 750;
+}
+.hcw-peers .hcw-feedback-text h3 {
+  margin: 13px 0 9px;
+  color: #2e4053;
+  font-size: clamp(20px, 2.6vw, 28px);
+  line-height: 1.38;
+}
+.hcw-peers .hcw-feedback-text p {
+  max-width: 580px;
+  margin: 0;
+  color: #647385;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.9;
+}
+.hcw-peers .hcw-feedback-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 25px;
+  padding: 7px 12px;
+  border: 1px solid #dce8ec;
+  border-radius: 999px;
+  color: #677f8b;
+  background: #f8fcfc;
+  font-size: 11px;
+}
+.hcw-peers .hcw-feedback-status span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #90b6b7;
+}
+.hcw-peers .hcw-feedback-deco {
+  justify-self: end;
+  align-self: end;
+  color: #dae6eb;
+  font-size: 70px;
+  line-height: 1;
+  font-weight: 800;
+  user-select: none;
+}
+@media (max-width: 760px) {
+  .hcw-peers #support.hcw-support-section { margin-top: 22px; padding: 38px 22px 33px; border-radius: 21px; }
+  .hcw-peers .hcw-section-intro { grid-template-columns: 1fr; gap: 12px; }
+  .hcw-peers .hcw-support-grid { grid-template-columns: 1fr; }
+  .hcw-peers .hcw-support-card { min-height: 0; padding: 23px 22px; }
+  .hcw-peers #feedback.hcw-feedback-section { padding-top: 65px; }
+  .hcw-peers .hcw-feedback-stage { grid-template-columns: 40px minmax(0,1fr); gap: 5px; padding: 25px 20px 27px; min-height: 0; border-radius: 21px; }
+  .hcw-peers .hcw-feedback-quote { font-size: 66px; }
+  .hcw-peers .hcw-feedback-deco { display: none; }
+}
+@media (max-width: 430px) {
+  .hcw-peers .hcw-feedback-stage { grid-template-columns: 1fr; gap: 0; }
+  .hcw-peers .hcw-feedback-quote { font-size: 51px; line-height: .8; }
+  .hcw-peers .hcw-feedback-text h3 { margin-top: 11px; }
+}
+
+
+
+
+/* ===== H.cw 关注我 · 确认版 HTML 移植到 Quartz（仅作用于 /关注我） ===== */
+/* 无需覆盖现有 custom.scss；本块原样提取原型主视觉、排版参数，仅限制作用域。 */
+body[data-slug="关注我"] {
+  background: #0e1219;
+  color-scheme: dark;
+  --nav-height: 82px;
+}
+body[data-slug="关注我"] .page { max-width: none !important; margin: 0 !important; padding: 0 !important; }
+body[data-slug="关注我"] .page > #quartz-body {
+  display: block !important; padding: 0 !important; margin: 0 !important;
+  width: 100% !important; max-width: none !important;
+}
+body[data-slug="关注我"] #quartz-body > .sidebar,
+body[data-slug="关注我"] #quartz-body > footer,
+body[data-slug="关注我"] #quartz-body .page-header,
+body[data-slug="关注我"] #quartz-body .center > hr,
+body[data-slug="关注我"] #quartz-body .center > .page-footer { display: none !important; }
+body[data-slug="关注我"] #quartz-body .center,
+body[data-slug="关注我"] #quartz-body .center > article {
+  width: 100% !important; max-width: none !important; min-width: 0 !important;
+  margin: 0 !important; padding: 0 !important;
+}
+body[data-slug="关注我"] #quartz-body .center > article > h1:first-child { display: none !important; }
+body[data-slug="关注我"] .hcw-site-nav,
+body[data-slug="关注我"] .hcw-site-nav * { box-sizing: border-box; }
+body[data-slug="关注我"] .hcw-site-nav {
+  position: relative; z-index: 4; top: auto;
+  height: 82px; min-height: 82px;
+  padding: 0 max(28px, calc((100vw - 1510px) / 2));
+  display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 24px;
+  background: #191c22; border-bottom: 1px solid rgba(255,255,255,.075);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+  backdrop-filter: none; color: #f5f7fc;
+}
+body[data-slug="关注我"] .hcw-site-nav .hcw-brand {
+  display: inline-flex; align-items: center; gap: 12px; font-size: 21px;
+  font-weight: 800; text-decoration: none; white-space: nowrap; color: #f5f7fc !important;
+}
+body[data-slug="关注我"] .hcw-site-nav .hcw-logo {
+  width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center;
+  background: linear-gradient(135deg,#7393fc 4%,#80b8aa 100%); font-size: 15px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.24); color:#fff;
+}
+body[data-slug="关注我"] .hcw-site-nav .hcw-site-links {
+  display: flex; align-items: center; gap: 7px;
+}
+body[data-slug="关注我"] .hcw-site-nav .hcw-nav-link {
+  padding: 11px 15px; border-radius: 12px; text-decoration: none; white-space: nowrap;
+  color: #e8ebf1 !important; font-weight: 700; font-size: 15px; background: transparent;
+}
+body[data-slug="关注我"] .hcw-site-nav .hcw-nav-link:hover { background: rgba(255,255,255,.08); }
+body[data-slug="关注我"] .hcw-site-nav .hcw-nav-link.active,
+body[data-slug="关注我"] .hcw-site-nav .hcw-nav-link[aria-current="page"] {
+  background: rgba(255,255,255,.14); color:#fff !important;
+}
+body[data-slug="关注我"] .follow-page,
+body[data-slug="关注我"] .follow-page * { box-sizing: border-box; }
+body[data-slug="关注我"] .follow-page { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif; color:#f5f7fc; }
+body[data-slug="关注我"] .follow-page h1 { color:#f5f7fc !important; }
+body[data-slug="关注我"] .follow-page a { color: inherit; }
+body[data-slug="关注我"] .follow-page a:focus-visible,
+body[data-slug="关注我"] .follow-page button:focus-visible { outline: 3px solid #b1c8ff; outline-offset:4px; }
+body[data-slug="关注我"] .follow-page a:focus-visible,
+body[data-slug="关注我"] .follow-page button:focus-visible { outline: 3px solid #b1c8ff; outline-offset: 4px; }
+body[data-slug="关注我"] .follow-page { min-height: calc(100svh - var(--nav-height));
+      overflow: hidden; isolation: isolate; position: relative;
+      background:
+        radial-gradient(ellipse 39% 42% at 50% 12%, rgba(202,157,84,.33), transparent 73%),
+        radial-gradient(ellipse 43% 46% at 49% 57%, rgba(107,164,145,.37), transparent 76%),
+        radial-gradient(ellipse 62% 50% at 48% 104%, rgba(69,95,179,.50), transparent 82%),
+        linear-gradient(180deg,#111419 0%,#141b21 48%,#101827 100%); }
+body[data-slug="关注我"] .follow-page::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background-image: radial-gradient(rgba(255,255,255,.17) .6px, transparent .7px);
+      background-size: 27px 27px; opacity: .075;
+      mask-image: linear-gradient(to bottom, transparent, #000 33%, transparent 88%); }
+body[data-slug="关注我"] .follow-page::after { content: ""; position: absolute; z-index: -1; pointer-events: none;
+      width: min(700px,90vw); aspect-ratio: 1; border-radius: 50%; left: 50%; top: 12%; transform: translateX(-50%);
+      background: radial-gradient(circle,rgba(197,216,206,.08),transparent 67%); filter: blur(42px); }
+body[data-slug="关注我"] .follow-page .follow-content { max-width: 1110px; margin: 0 auto; padding: 69px 30px 53px; text-align: center; }
+body[data-slug="关注我"] .follow-page .eyebrow { margin: 0 0 28px; color: #d8e2ea; letter-spacing: .31em; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+body[data-slug="关注我"] .follow-page .avatar-wrap { position: relative; width: fit-content; margin: 0 auto 22px; }
+body[data-slug="关注我"] .follow-page .avatar-wrap::before { content: ""; position: absolute; inset: -11px; border: 1px solid rgba(227,237,246,.25); border-radius: 50%; }
+body[data-slug="关注我"] .follow-page .avatar { width: 165px; height: 165px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+      background: linear-gradient(136deg,#768fac 2%,#afcbc3 51%,#667d91 98%);
+      box-shadow: 0 27px 54px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.28);
+      font-size: 66px; font-weight: 800; letter-spacing: -.055em; color: #fff; }
+body[data-slug="关注我"] .follow-page .avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+body[data-slug="关注我"] .follow-page h1 { margin: 0 0 7px; font-size: clamp(36px,4.2vw,51px); line-height: 1.24; letter-spacing: -.035em; }
+body[data-slug="关注我"] .follow-page .intro { margin: 9px 0 0; font-size: clamp(16px,2.1vw,19px); line-height: 1.85; font-weight: 650; letter-spacing: .035em; }
+body[data-slug="关注我"] .follow-page .description { margin: 18px auto 0; color: #dae1e9; max-width: 600px; font-size: 14px; line-height: 1.85; }
+body[data-slug="关注我"] .follow-page .links-section { margin: 43px auto 0; max-width: 960px; }
+body[data-slug="关注我"] .follow-page .section-heading { display: flex; align-items: center; justify-content: center; gap: 13px; margin: 0 0 19px; color: #e3e9f1; font-weight: 700; letter-spacing: .09em; font-size: 13px; }
+body[data-slug="关注我"] .follow-page .section-heading::before,
+body[data-slug="关注我"] .follow-page .section-heading::after { content:""; height: 1px; width: 43px; background: linear-gradient(90deg,transparent,rgba(255,255,255,.37)); }
+body[data-slug="关注我"] .follow-page .section-heading::after { transform: rotate(180deg); }
+body[data-slug="关注我"] .follow-page .social-list { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+body[data-slug="关注我"] .follow-page .social-card { min-width: 0; min-height: 93px; padding: 17px 15px; display: flex; gap: 12px; align-items: center; text-align: left;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 19px; background: rgba(18,25,37,.35);
+      color: #fafbfe; text-decoration: none; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05); transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+body[data-slug="关注我"] .follow-page a.social-card:hover { transform: translateY(-4px); background: rgba(65,81,105,.38); border-color: rgba(218,230,255,.53); }
+body[data-slug="关注我"] .follow-page .social-card.is-unset { opacity: .62; cursor: not-allowed; }
+body[data-slug="关注我"] .follow-page .social-icon { width: 42px; height: 42px; flex: 0 0 42px; border-radius: 13px; display: grid; place-items: center; background: rgba(255,255,255,.13); font-size: 20px; font-weight: 850; }
+body[data-slug="关注我"] .follow-page .social-icon svg { width: 22px; height: 22px; fill: currentColor; }
+body[data-slug="关注我"] .follow-page .social-text { min-width: 0; flex: 1; }
+body[data-slug="关注我"] .follow-page .social-title { display: block; font-size: 15px; font-weight: 750; white-space: nowrap; }
+body[data-slug="关注我"] .follow-page .social-detail { display: block; margin-top: 5px; color: #b9c6d4; font-size: 11px; white-space: nowrap; }
+body[data-slug="关注我"] .follow-page .arrow { flex: 0 0 auto; color: #c7d5e7; font-size: 15px; }
+body[data-slug="关注我"] .follow-page .contact-line { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; align-items: center; margin: 24px auto 0; color: #bdc8d7; font-size: 13px; }
+body[data-slug="关注我"] .follow-page .contact-line a { color: #f2f5fb; text-decoration: underline; text-underline-offset: 4px; }
+body[data-slug="关注我"] .follow-page .contact-line .dot { opacity: .5; }
+body[data-slug="关注我"] .follow-page .small-note { margin: 34px auto 0; max-width: 650px; font-size: 12px; color: #b5bfce; line-height: 1.7; }
+body[data-slug="关注我"] .follow-page .page-footer { margin-top: 35px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.095); font-size: 12px; color: #a3aebf; }
+@media (max-width: 800px) {
+body[data-slug="关注我"] .follow-page .follow-content { padding-top: 53px; }
+body[data-slug="关注我"] .follow-page .social-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 480px) {
+body[data-slug="关注我"] .follow-page .follow-content { padding: 43px 17px 38px; }
+body[data-slug="关注我"] .follow-page .eyebrow { font-size: 10px; letter-spacing: .19em; margin-bottom: 28px; }
+body[data-slug="关注我"] .follow-page .avatar { width: 139px; height: 139px; font-size: 58px; }
+body[data-slug="关注我"] .follow-page .intro { line-height: 1.9; }
+body[data-slug="关注我"] .follow-page .description { padding: 0 7px; }
+body[data-slug="关注我"] .follow-page .links-section { margin-top: 35px; }
+body[data-slug="关注我"] .follow-page .social-list { gap: 9px; }
+body[data-slug="关注我"] .follow-page .social-card { min-height: 80px; padding: 12px 9px; gap: 8px; border-radius: 15px; }
+body[data-slug="关注我"] .follow-page .social-icon { width: 34px; height: 34px; flex-basis: 34px; font-size: 16px; border-radius: 10px; }
+body[data-slug="关注我"] .follow-page .social-icon svg { width: 19px; height: 19px; }
+body[data-slug="关注我"] .follow-page .social-title { font-size: 13px; }
+body[data-slug="关注我"] .follow-page .social-detail { font-size: 10px; }
+body[data-slug="关注我"] .follow-page .arrow { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+body[data-slug="关注我"] .follow-page *::before,
+body[data-slug="关注我"] .follow-page *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+
+@media (max-width: 800px) {
+  body[data-slug="关注我"] .hcw-site-nav {
+    padding: 15px 20px; height: auto; min-height: 0;
+    flex-wrap: wrap; justify-content: center; gap: 12px;
+  }
+  body[data-slug="关注我"] .hcw-site-nav .hcw-site-links {
+    width: 100%; justify-content: center; gap: 1px; overflow-x: auto; scrollbar-width: none;
+  }
+  body[data-slug="关注我"] .hcw-site-nav .hcw-site-links::-webkit-scrollbar { display:none; }
+  body[data-slug="关注我"] .hcw-site-nav .hcw-nav-link { padding: 9px 10px; font-size: 12px; }
+}
+@media (max-width: 480px) {
+  body[data-slug="关注我"] .hcw-site-nav { align-items: flex-start; }
+  body[data-slug="关注我"] .hcw-site-nav .hcw-brand { font-size: 18px; }
+}
+/* 关注我：提高两行介绍文字在深色背景上的可读性 */
+body[data-slug="关注我"] .follow-page .intro {
+  color: #eef2f8 !important;
+}
+
+/* ============================================================
+   H.cw 全站明暗切换（2026-09）
+   与 Quartz 内置 darkmode 插件共用 :root[saved-theme]，不另建状态。
+   原有页面布局与深色首页/关注我主视觉保持不变。
+   ============================================================ */
+
+/* 顶部导航是五个栏目共用的主题入口，侧栏原有开关只隐藏显示，不停用插件。 */
+.hcw-site-nav .hcw-site-links { margin-left: auto; }
+.hcw-site-nav button.hcw-theme-toggle.darkmode {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: auto;
+  min-width: 86px;
+  height: 38px;
+  margin: 0 0 0 8px;
+  padding: 0 12px;
+  border: 1px solid var(--lightgray);
+  border-radius: 11px;
+  background: var(--highlight);
+  color: var(--dark) !important;
+  font: 650 12px/1 "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.hcw-site-nav button.hcw-theme-toggle.darkmode:hover { transform: translateY(-1px); border-color: var(--gray); }
+.hcw-site-nav button.hcw-theme-toggle.darkmode:focus-visible { outline: 3px solid #6a91ed; outline-offset: 3px; }
+.hcw-theme-toggle .hcw-show-light,
+.hcw-theme-toggle .hcw-show-dark { display: none; }
+:root[saved-theme="dark"] .hcw-theme-toggle .hcw-show-light { display: inline; }
+:root[saved-theme="light"] .hcw-theme-toggle .hcw-show-dark { display: inline; }
+/* 首次载入时万一尚未写入 saved-theme，也保留明确按钮文字。 */
+:root:not([saved-theme]) .hcw-theme-toggle .hcw-show-dark { display: inline; }
+/* 页内旧开关保留给 Quartz 绑定事件，但隐藏其视觉入口，避免一页出现两个切换按钮。 */
+#quartz-body .sidebar .darkmode { display: none !important; }
+
+/* 深色首页 / 关注我：顶栏按钮沿用页面深色玻璃质感。 */
+:root[saved-theme="dark"] body:is([data-slug="index"], [data-slug="关注我"]) .hcw-site-nav button.hcw-theme-toggle {
+  color: #edf2fa !important;
+  border-color: #ffffff30;
+  background: #ffffff15;
+}
+:root[saved-theme="dark"] body:is([data-slug="index"], [data-slug="关注我"]) .hcw-site-nav button.hcw-theme-toggle:hover { background: #ffffff26; }
+
+@media (max-width: 720px) {
+  .hcw-site-nav { gap: 8px 10px; }
+  .hcw-site-nav .hcw-site-links {
+    order: 3; flex: 0 0 100%; width: 100%; margin-left: 0;
+    justify-content: space-between;
+    gap: 2px;
+    overflow-x: auto;
+  }
+  .hcw-site-nav button.hcw-theme-toggle.darkmode {
+    order: 2;
+    min-width: 75px;
+    height: 35px;
+    margin-left: auto;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+  /* 关注我旧版在 800px 以下独立调整顶栏，这里覆盖其换行规则。 */
+  body[data-slug="关注我"] .hcw-site-nav {
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px 10px;
+    padding: 12px 16px;
+  }
+  body[data-slug="关注我"] .hcw-site-nav .hcw-site-links {
+    order: 3; flex-basis: 100%; width: 100%; margin-left: 0;
+    justify-content: space-between;
+  }
+}
+@media (max-width: 380px) {
+  .hcw-site-nav .hcw-brand { font-size: 16px; }
+  .hcw-site-nav .hcw-nav-link,
+  body[data-slug="关注我"] .hcw-site-nav .hcw-nav-link { padding: 8px 7px; font-size: 11px; }
+}
+
+/* ============================================================
+   浅色模式：首页改用保留金 / 绿 / 蓝光晕的浅色版本。
+   深色模式下原有首页样式完全不改。
+   ============================================================ */
+:root[saved-theme="light"] body[data-slug="index"] .hcw-site-nav,
+:root[saved-theme="light"] body[data-slug="关注我"] .hcw-site-nav {
+  color: #253349;
+  background: rgba(250, 252, 255, .94);
+  border-color: #dce4ed;
+  backdrop-filter: blur(16px);
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-brand,
+:root[saved-theme="light"] body[data-slug="关注我"] .hcw-brand,
+:root[saved-theme="light"] body[data-slug="index"] .hcw-nav-link,
+:root[saved-theme="light"] body[data-slug="关注我"] .hcw-nav-link {
+  color: #26364b !important;
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-nav-link:hover,
+:root[saved-theme="light"] body[data-slug="index"] .hcw-nav-link.active,
+:root[saved-theme="light"] body[data-slug="关注我"] .hcw-nav-link:hover,
+:root[saved-theme="light"] body[data-slug="关注我"] .hcw-nav-link.active {
+  color: #27477a !important;
+  background: #e7edf7;
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-site-nav button.hcw-theme-toggle,
+:root[saved-theme="light"] body[data-slug="关注我"] .hcw-site-nav button.hcw-theme-toggle {
+  color: #26364b !important;
+  border-color: #d5dfe9;
+  background: #edf2f9;
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-home {
+  color: #1c2b3e;
+  background: linear-gradient(155deg, #fffdf7, #f3f8f7 52%, #eef3ff);
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-home::before {
+  background:
+    radial-gradient(ellipse 30% 42% at 55% 14%, #f0cc80bb, transparent 83%),
+    radial-gradient(ellipse 46% 48% at 51% 51%, #9bd6c0aa, transparent 86%),
+    radial-gradient(ellipse 48% 42% at 44% 80%, #9fcbf2c4, transparent 88%),
+    radial-gradient(ellipse 45% 24% at 67% 84%, #adc5f5a6, transparent 80%);
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-home::after {
+  background: radial-gradient(ellipse 95% 95% at 50% 46%, transparent 25%, #f5f8fc8c 100%);
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-eyebrow { color: #55718b; }
+:root[saved-theme="light"] body[data-slug="index"] .hcw-home h1 { color: #1f2d40 !important; }
+:root[saved-theme="light"] body[data-slug="index"] .hcw-home h1 span { color: #fff !important; }
+:root[saved-theme="light"] body[data-slug="index"] .hcw-home-subtitle { color: #28394c !important; }
+:root[saved-theme="light"] body[data-slug="index"] .hcw-home-desc { color: #516577 !important; }
+:root[saved-theme="light"] body[data-slug="index"] .hcw-btn-primary {
+  background: #254b87; color: #fff !important;
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-btn-outline {
+  color: #28486f !important;
+  border-color: #9fb3c8;
+  background: #ffffff80;
+}
+:root[saved-theme="light"] body[data-slug="index"] .hcw-home-sign { color: #667d92; }
+
+/* ============================================================
+   浅色模式：关注我。保留原始居中布局、头像、卡片尺寸及光晕。
+   深色模式下已确认的原型 CSS 不改。
+   ============================================================ */
+:root[saved-theme="light"] body[data-slug="关注我"] {
+  color-scheme: light;
+  color: #26364b;
+  background: #f5f8fc;
+}
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page {
+  color: #25364a;
+  background:
+    radial-gradient(ellipse 39% 42% at 50% 12%, #e7cc9b8a, transparent 73%),
+    radial-gradient(ellipse 43% 46% at 49% 57%, #abd8c5a6, transparent 76%),
+    radial-gradient(ellipse 62% 50% at 48% 104%, #b6c8efaa, transparent 82%),
+    linear-gradient(180deg, #fffdf8 0%, #f1f8f7 48%, #eef3fd 100%);
+}
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page::before {
+  background-image: radial-gradient(#52718a33 .6px, transparent .7px);
+}
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page h1 { color: #23354b !important; }
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .eyebrow { color: #607990; }
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .intro { color: #2a3b50 !important; }
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .description,
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .section-heading { color: #4c6276; }
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .section-heading::before,
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .section-heading::after {
+  background: linear-gradient(90deg, transparent, #68839b88);
+}
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .social-card {
+  color: #27394f;
+  border-color: #d4e0ea;
+  background: #ffffffa8;
+  box-shadow: 0 12px 35px #4760780d, inset 0 1px 0 #fff;
+}
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .social-icon { background: #e6edf5; }
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .social-detail,
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .arrow,
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .contact-line,
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .small-note,
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .page-footer { color: #536b81; }
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .page-footer { border-color: #c9d7e5; }
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page .contact-line a { color: #234c89; }
+:root[saved-theme="light"] body[data-slug="关注我"] .follow-page a.social-card:hover {
+  background: #fff;
+  border-color: #97b1d1;
+}
+
+/* ============================================================
+   深色模式：个人主页与同行者改用深色内容卡片。
+   普通笔记页使用 Quartz 自带的暗色变量，无需重写正文布局。
+   ============================================================ */
+:root[saved-theme="dark"] body:is([data-slug="about"], [data-slug="同行者"]) {
+  --hcw-ink: #e7eef8;
+  background: #111922;
+}
+:root[saved-theme="dark"] body:is([data-slug="about"], [data-slug="同行者"]) .hcw-site-nav {
+  background: #161d27f2;
+  border-color: #ffffff17;
+}
+:root[saved-theme="dark"] body:is([data-slug="about"], [data-slug="同行者"]) .hcw-brand,
+:root[saved-theme="dark"] body:is([data-slug="about"], [data-slug="同行者"]) .hcw-nav-link {
+  color: #ebf1fa !important;
+}
+:root[saved-theme="dark"] body:is([data-slug="about"], [data-slug="同行者"]) .hcw-nav-link:hover,
+:root[saved-theme="dark"] body:is([data-slug="about"], [data-slug="同行者"]) .hcw-nav-link.active {
+  background: #ffffff1c;
+  color: #fff !important;
+}
+:root[saved-theme="dark"] body:is([data-slug="about"], [data-slug="同行者"]) .hcw-site-nav button.hcw-theme-toggle {
+  color: #ebf1fa !important;
+  background: #ffffff12;
+  border-color: #ffffff30;
+}
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-about,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers { background: #111922; color: #e7eef8; }
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-profile-role { color: #dfba8a; }
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-profile-caption,
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-about-main > p,
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-interest p,
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-interest-grid p,
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-placeholder { color: #a9b9cc !important; }
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-interest,
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-interest-grid > div {
+  background: #1b2735; border-color: #344456; color: #ebf1fa;
+}
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-interest-grid small,
+:root[saved-theme="dark"] body[data-slug="about"] .hcw-about-main > small { color: #d8b789; }
+
+/* 同行者：卡片、辅导、反馈及双栏详情，统一反转，不改变布局。 */
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers-lead { color: #e2ebf8 !important; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers-intro,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers section > p { color: #b2c2d4 !important; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers section { border-color: #344456; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers-tabs a,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers button.hcw-peers-arrow {
+  background: #233245; border-color: #3a5268; color: #e7eef8;
+}
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers button.hcw-peers-arrow:hover:not(:disabled) { background: #32475c; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers button.hcw-peer-card {
+  background: linear-gradient(148deg, #1b2735, #223245 65%, #282f38);
+  border-color: #35485b;
+  color: #e6eff8;
+  box-shadow: 0 10px 28px #0002;
+}
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peer-name,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peer-meta dd { color: #edf3fb; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peer-meta dt,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peer-more,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peers-guide,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peers-count { color: #b1c1d2; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peer-more { border-color: #3b4e61; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peer-label,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peers-section-heading small,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-section-intro small { color: #e2b988; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-peers-demo { background: #3e3527; border-color: #716147; color: #f0d5a6; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers #support.hcw-support-section,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-feedback-stage {
+  background: linear-gradient(145deg, #1a2533, #202e3d 65%, #2c3037);
+  border-color: #3a4b5f;
+}
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-support-card {
+  background: #263445; border-color: #425365; box-shadow: 0 10px 28px #0002;
+}
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-section-intro h2,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-support-card h3,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-feedback-text h3 { color: #f0f5fc; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-section-intro > p,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-support-card > p,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-support-footnote p,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-feedback-text p { color: #b4c4d6; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-support-tag,
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-feedback-status { color: #acbfd2; }
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-feedback-status {
+  background: #283e4b; border-color: #456271;
+}
+:root[saved-theme="dark"] body[data-slug="同行者"] .hcw-peers .hcw-feedback-deco { color: #60738a; }
+:root[saved-theme="dark"] .hcw-peer-dialog {
+  background: radial-gradient(circle at 99% 93%, #304354 0, #1b2735 43%, #1a2430 100%);
+  color: #e7eef8;
+}
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-dialog-close,
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-upload {
+  color: #e7eef8; background: #2b3c50; border-color: #465d71;
+}
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-dialog-close:hover,
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-upload:hover { background: #354c64; }
+:root[saved-theme="dark"] .hcw-peer-dialog h2#hcw-peer-modal-name,
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-meta dd,
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-copy h3 { color: #f1f5fc; }
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-meta dt,
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-copy,
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-intro,
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-message,
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-upload-note { color: #b4c5d7; }
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-meta > div {
+  background: transparent; border-color: transparent;
+}
+:root[saved-theme="dark"] .hcw-peer-dialog .hcw-peer-detail-visual { border-color: #364b5d; }
+
+/* 设置里如果已显示深色主题，旧宣传页也不影响全站开关。 */
+:root[saved-theme="light"] body[data-slug="connect"] .hcw-connect { background: #f4f7fb; color: #26374c; }
+:root[saved-theme="light"] body[data-slug="connect"] .hcw-connect .hcw-connect-tag,
+:root[saved-theme="light"] body[data-slug="connect"] .hcw-connect .hcw-connect-tip { color: #566b7d !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hcw-site-nav button.hcw-theme-toggle { transition: none; }
+}
+/* ==========================================
+   H.cw：统一「关注我」与其他页面的导航栏尺寸
+   ========================================== */
+
+@media (min-width: 721px) {
+
+  body[data-slug="关注我"] {
+    --nav-height: 72px;
+  }
+
+  body[data-slug="关注我"] .hcw-site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    height: 72px;
+    min-height: 72px;
+
+    padding: 0 clamp(16px, 5vw, 74px);
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  body[data-slug="关注我"] .hcw-site-nav .hcw-brand {
+    gap: 9px;
+    font-size: 19px;
+    font-weight: 750;
+  }
+
+  body[data-slug="关注我"] .hcw-site-nav .hcw-logo {
+    width: 31px;
+    height: 31px;
+    border-radius: 9px;
+    font-size: 12px;
+  }
+
+  body[data-slug="关注我"] .hcw-site-nav .hcw-site-links {
+    gap: 4px;
+  }
+
+  body[data-slug="关注我"] .hcw-site-nav .hcw-nav-link {
+    padding: 9px 13px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 580;
+  }
+
+}

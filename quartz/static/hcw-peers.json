@@ -1,0 +1,71 @@
+{
+  "demo": true,
+  "students": [
+    {
+      "name": "展示位 01（演示）",
+      "undergraduate": "待本人授权后填写",
+      "graduate": "待本人授权后填写",
+      "research": "待填写",
+      "background": "待填写",
+      "intro": "此处预留学生个人介绍。",
+      "story": "",
+      "message": "",
+      "photo": ""
+    },
+    {
+      "name": "展示位 02（演示）",
+      "undergraduate": "待本人授权后填写",
+      "graduate": "待本人授权后填写",
+      "research": "待填写",
+      "background": "待填写",
+      "intro": "此处预留学生个人介绍。",
+      "story": "",
+      "message": "",
+      "photo": ""
+    },
+    {
+      "name": "展示位 03（演示）",
+      "undergraduate": "待本人授权后填写",
+      "graduate": "待本人授权后填写",
+      "research": "待填写",
+      "background": "待填写",
+      "intro": "此处预留学生个人介绍。",
+      "story": "",
+      "message": "",
+      "photo": ""
+    },
+    {
+      "name": "展示位 04（演示）",
+      "undergraduate": "待本人授权后填写",
+      "graduate": "待本人授权后填写",
+      "research": "待填写",
+      "background": "待填写",
+      "intro": "此处预留学生个人介绍。",
+      "story": "",
+      "message": "",
+      "photo": ""
+    },
+    {
+      "name": "展示位 05（演示）",
+      "undergraduate": "待本人授权后填写",
+      "graduate": "待本人授权后填写",
+      "research": "待填写",
+      "background": "待填写",
+      "intro": "此处预留学生个人介绍。",
+      "story": "",
+      "message": "",
+      "photo": ""
+    },
+    {
+      "name": "展示位 06（演示）",
+      "undergraduate": "待本人授权后填写",
+      "graduate": "待本人授权后填写",
+      "research": "待填写",
+      "background": "待填写",
+      "intro": "此处预留学生个人介绍。",
+      "story": "",
+      "message": "",
+      "photo": ""
+    }
+  ]
+}
