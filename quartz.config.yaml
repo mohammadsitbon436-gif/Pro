@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: plausible
   locale: en-US
-  baseUrl: mohammadsitbon436-gif.github.io/Pro
+  baseUrl: prohcw.github.io/my-knowledge-island
   ignorePatterns:
     - private
     - templates
