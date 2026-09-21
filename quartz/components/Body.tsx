@@ -13,7 +13,7 @@ const Body: QuartzComponent = ({ children, ctx, cfg, fileData }: QuartzComponent
     { label: "同行者", path: "同行者", active: slug === "同行者" },
     { label: "关注我", path: "关注我", active: slug === "关注我" },
   ]
-  const url = (path: string) => `${prefix}/${path}`
+  const url = (path: string) => path ? `${prefix}/${path}.html` : `${prefix}/`
 
   return (
     <>
