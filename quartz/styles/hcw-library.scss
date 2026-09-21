@@ -208,6 +208,8 @@ body.hcw-library-note-page #quartz-body > .center {
 }
 
 .hcw-reader-content {
+  box-sizing:border-box;
+  width:100%;
   min-width:0;
   max-width:100%;
   padding:clamp(32px,2.8vw,42px) clamp(30px,3.2vw,50px);
@@ -332,7 +334,11 @@ body.hcw-library-note-page #quartz-body > .center {
   box-shadow:0 0 0 7px var(--hcw-lb-accent-soft);
 }
 
-.hcw-reader-compact-bar { display:none; }
+.hcw-reader-compact-bar {
+  box-sizing:border-box;
+  width:100%;
+  display:none;
+}
 
 /* Only one structural breakpoint: two-column reader -> compact single-column reader. */
 @media (max-width:980px) {
@@ -395,7 +401,6 @@ body.hcw-library-note-page #quartz-body > .center {
   }
 
   .hcw-reader-content {
-    width:100%;
     padding:clamp(24px,4vw,34px) clamp(18px,4vw,28px);
   }
 }
