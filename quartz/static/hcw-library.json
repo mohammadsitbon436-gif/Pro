@@ -1,0 +1,40 @@
+{
+  "year": 2026,
+  "volumes": [
+    {
+      "id": "vol01",
+      "volume": "VOL. 01",
+      "type": "COURSE",
+      "folder": "环境工程原理",
+      "english": "Environmental Engineering Fundamentals",
+      "description": "围绕环境工程中的基本传递过程与工程计算，系统整理课程中的核心理论、公式及典型问题。",
+      "theme": [
+        "#5062cb",
+        "#283575"
+      ]
+    },
+    {
+      "id": "vol02",
+      "volume": "VOL. 02",
+      "type": "RESEARCH",
+      "folder": "电场强化稀土离子浸出课题",
+      "english": "IAD-EKM · Rare Earth Leaching",
+      "description": "记录离子吸附型稀土电动开采相关的研究思路、实验设计、动态供电策略及阴极界面问题。",
+      "theme": [
+        "#337c71",
+        "#173f3a"
+      ]
+    }
+  ],
+  "recent": [
+    {
+      "slug": "环境工程原理/流体流动",
+      "date": "SEP 20"
+    },
+    {
+      "slug": "电场强化稀土离子浸出课题/iad-ekm潜在新研究思路_2026-09",
+      "date": "SEP 20",
+      "displayTitle": "IAD-EKM 潜在新研究思路"
+    }
+  ]
+}
