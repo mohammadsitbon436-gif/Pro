@@ -1,0 +1,56 @@
+/* H.cw atmosphere refinements approved with 同行者 V5.
+   Imported after hcw-site-bg.scss so these palette variables override only values, not behavior. */
+:root[data-hcw-background="mist"]:not([saved-theme="light"]){
+  --base:#142027;
+  --glow1:rgba(105,170,167,.30);--glow1b:rgba(105,170,167,.12);
+  --glow2:rgba(85,126,163,.20);--glow2b:rgba(85,126,163,.07);
+  --glow3:rgba(170,187,188,.10);--glow3b:rgba(170,187,188,.035);
+  --glow4:rgba(70,111,137,.14);
+  --veil1:rgba(120,180,174,.11);--veil2:rgba(102,137,170,.08);
+  --vignette:rgba(9,16,22,.28);
+}
+:root[data-hcw-background="mist"][saved-theme="light"]{
+  --base:#eef5f5;
+  --glow1:rgba(126,190,183,.26);--glow1b:rgba(126,190,183,.10);
+  --glow2:rgba(139,173,201,.18);--glow2b:rgba(139,173,201,.065);
+  --glow3:rgba(216,229,226,.24);--glow3b:rgba(216,229,226,.08);
+  --glow4:rgba(155,190,199,.13);
+  --veil1:rgba(157,209,200,.11);--veil2:rgba(170,197,211,.08);
+  --vignette:rgba(218,231,232,.15);
+}
+:root[data-hcw-background="champagne"]:not([saved-theme="light"]){
+  --base:#1c2025;
+  --glow1:rgba(124,145,156,.12);--glow1b:rgba(124,145,156,.045);
+  --glow2:rgba(73,91,118,.15);--glow2b:rgba(73,91,118,.055);
+  --glow3:rgba(192,155,101,.30);--glow3b:rgba(192,155,101,.10);
+  --glow4:rgba(111,124,132,.09);
+  --veil1:rgba(156,165,160,.07);--veil2:rgba(179,155,122,.10);
+  --vignette:rgba(11,14,18,.27);
+}
+:root[data-hcw-background="champagne"][saved-theme="light"]{
+  --base:#f4f1eb;
+  --glow1:rgba(189,198,200,.15);--glow1b:rgba(189,198,200,.05);
+  --glow2:rgba(162,176,193,.13);--glow2b:rgba(162,176,193,.045);
+  --glow3:rgba(225,193,147,.31);--glow3b:rgba(225,193,147,.11);
+  --glow4:rgba(198,204,202,.12);
+  --veil1:rgba(201,208,204,.08);--veil2:rgba(221,198,165,.12);
+  --vignette:rgba(224,220,211,.14);
+}
+:root[data-hcw-background="aurora"]:not([saved-theme="light"]){
+  --base:#151b2a;
+  --glow1:rgba(88,132,164,.24);--glow1b:rgba(88,132,164,.08);
+  --glow2:rgba(98,106,180,.22);--glow2b:rgba(98,106,180,.075);
+  --glow3:rgba(155,111,170,.24);--glow3b:rgba(155,111,170,.08);
+  --glow4:rgba(85,154,156,.13);
+  --veil1:rgba(142,137,198,.11);--veil2:rgba(105,170,171,.10);
+  --vignette:rgba(10,13,24,.28);
+}
+:root[data-hcw-background="aurora"][saved-theme="light"]{
+  --base:#f1f3fa;
+  --glow1:rgba(143,185,205,.22);--glow1b:rgba(143,185,205,.075);
+  --glow2:rgba(163,168,224,.22);--glow2b:rgba(163,168,224,.08);
+  --glow3:rgba(211,172,216,.20);--glow3b:rgba(211,172,216,.07);
+  --glow4:rgba(155,206,201,.12);
+  --veil1:rgba(190,192,229,.10);--veil2:rgba(162,210,205,.09);
+  --vignette:rgba(224,227,241,.13);
+}
