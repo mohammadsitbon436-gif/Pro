@@ -1,0 +1,68 @@
+/* H.cw release polish: only the requested contact page and mountain text contrast.
+   All existing layouts, four-scene about navigation, theme and atmosphere controls remain unchanged. */
+
+/* The approved three social platforms use a three-column layout on desktop. */
+body[data-slug="关注我"] .follow-page #social-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 960px;
+  margin-inline: auto;
+}
+body[data-slug="关注我"] .follow-page #social-list .social-card {
+  min-width: 0;
+  overflow: hidden;
+}
+body[data-slug="关注我"] .follow-page #social-list .social-title {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+body[data-slug="关注我"] .follow-page #social-list .social-detail {
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 1.55;
+}
+body[data-slug="关注我"] .follow-page #social-list .social-card.is-unset {
+  opacity: .83;
+  cursor: default;
+}
+@media (max-width: 780px) {
+  body[data-slug="关注我"] .follow-page #social-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 540px) {
+  body[data-slug="关注我"] .follow-page #social-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark snow: a photo-only veil keeps headings and paragraphs legible,
+   without moving the fixed background or changing the four other glow palettes. */
+:root[data-hcw-background="mountain"]:not([saved-theme="light"]) body::before {
+  background-image:
+    linear-gradient(105deg, rgba(8, 16, 28, .63), rgba(10, 21, 36, .55)),
+    var(--hcw-mountain-url, linear-gradient(145deg, #536a84, #9bafc2));
+}
+:root[data-hcw-background="mountain"]:not([saved-theme="light"])
+  body[data-slug="系列笔记"] .hcw-library-hero p,
+:root[data-hcw-background="mountain"]:not([saved-theme="light"])
+  body[data-slug="系列笔记"] .hcw-library-shelf-head p,
+:root[data-hcw-background="mountain"]:not([saved-theme="light"])
+  body[data-slug="同行者"] .hcw-peers-intro,
+:root[data-hcw-background="mountain"]:not([saved-theme="light"])
+  body[data-slug="关注我"] .follow-page .description {
+  color: #edf3fb !important;
+  text-shadow: 0 1px 5px rgba(6, 17, 32, .55);
+}
+
+/* Light snow: darken secondary copy only; no change to layout or button actions. */
+:root[data-hcw-background="mountain"][saved-theme="light"]
+  body[data-slug="系列笔记"] .hcw-library-hero p,
+:root[data-hcw-background="mountain"][saved-theme="light"]
+  body[data-slug="系列笔记"] .hcw-library-shelf-head p,
+:root[data-hcw-background="mountain"][saved-theme="light"]
+  body[data-slug="同行者"] .hcw-peers-intro,
+:root[data-hcw-background="mountain"][saved-theme="light"]
+  body[data-slug="关注我"] .follow-page .description {
+  color: #24394e !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, .48);
+}
