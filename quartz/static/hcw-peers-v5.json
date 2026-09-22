@@ -1,0 +1,28 @@
+{
+  "records": [
+    {
+      "batch": "待补充",
+      "tier": "待补充",
+      "background": "待补充",
+      "services": "待补充",
+      "offers": "待补充",
+      "destination": "待补充"
+    }
+  ],
+  "stories": [
+    {
+      "id": "story-01",
+      "nickname": "昵称待补充",
+      "batch": "待补充",
+      "major": "待补充",
+      "from": "本科层次",
+      "to": "最终去向",
+      "background": "待补充",
+      "services": "待补充",
+      "offers": "待补充",
+      "destination": "待补充",
+      "story": "待补充",
+      "photo": ""
+    }
+  ]
+}

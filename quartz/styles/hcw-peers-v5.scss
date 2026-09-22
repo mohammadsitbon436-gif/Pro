@@ -1,0 +1,330 @@
+/* H.cw 同行者 V5 · integrated with existing Quartz nav + atmosphere controls. */
+body[data-slug="同行者"] .hcw-peers-v5,
+body[data-slug="同行者"] .hcw-peers-v5 *{box-sizing:border-box}
+body[data-slug="同行者"] .hcw-peers-v5{
+  --peer-ink:#f4f7fb;--peer-muted:#aebaca;--peer-soft:#7f8fa3;
+  --peer-accent:#95abff;--peer-cyan:#7ec8c0;--peer-warm:#d8b170;
+  --peer-line:rgba(219,231,247,.16);--peer-line2:rgba(219,231,247,.08);
+  --peer-page:min(1640px,calc(100vw - 48px));--peer-rail:182px;--peer-gap:34px;
+  width:100%;color:var(--peer-ink);font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+}
+:root[saved-theme="light"] body[data-slug="同行者"] .hcw-peers-v5{
+  --peer-ink:#233548;--peer-muted:#64778b;--peer-soft:#8795a4;
+  --peer-line:rgba(72,101,133,.18);--peer-line2:rgba(72,101,133,.09);
+}
+body[data-slug="同行者"] .hcw-peers-v5 a{text-decoration:none}
+body[data-slug="同行者"] .hcw-peers-v5 button{font:inherit;color:inherit}
+body[data-slug="同行者"] .hcw-peers-v5-shell{
+  width:var(--peer-page);margin:0 auto;display:grid;grid-template-columns:var(--peer-rail) minmax(0,1fr);gap:var(--peer-gap);
+}
+body[data-slug="同行者"] .hcw-peers-v5-rail{
+  position:sticky;top:94px;align-self:start;height:calc(100vh - 116px);display:flex;align-items:center;z-index:35;
+}
+body[data-slug="同行者"] .hcw-peers-v5-timeline{width:100%;position:relative;padding:14px 0}
+body[data-slug="同行者"] .hcw-peers-v5-timeline::before{
+  content:"";position:absolute;left:12px;top:27px;bottom:27px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--peer-line) 10%,var(--peer-line) 90%,transparent)
+}
+body[data-slug="同行者"] .hcw-peers-v5-timeline a{
+  position:relative;display:block;padding:11px 0 11px 34px;color:var(--peer-soft)!important;transition:.2s;
+}
+body[data-slug="同行者"] .hcw-peers-v5-timeline a::before{
+  content:"";position:absolute;left:8px;top:20px;width:9px;height:9px;border-radius:50%;
+  border:1px solid rgba(159,181,210,.55);background:var(--base,#101b29);transition:.2s;
+}
+body[data-slug="同行者"] .hcw-peers-v5-timeline small{display:block;font-size:10px;letter-spacing:.15em;font-weight:780}
+body[data-slug="同行者"] .hcw-peers-v5-timeline strong{display:block;margin-top:3px;font-size:13px;font-weight:700}
+body[data-slug="同行者"] .hcw-peers-v5-timeline a.active{color:var(--peer-ink)!important}
+body[data-slug="同行者"] .hcw-peers-v5-timeline a.active::before{
+  background:var(--peer-accent);border-color:var(--peer-accent);
+  box-shadow:0 0 0 6px rgba(137,164,245,.13),0 0 22px rgba(137,164,245,.28)
+}
+body[data-slug="同行者"] .hcw-peers-v5-main{min-width:0}
+body[data-slug="同行者"] .hcw-peers-v5-section{position:relative;padding:88px 0}
+body[data-slug="同行者"] .hcw-peers-v5-section+.hcw-peers-v5-section::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(142,169,232,.34) 18%,rgba(126,199,192,.22) 53%,rgba(215,177,111,.16) 82%,transparent)
+}
+body[data-slug="同行者"] .hcw-peers-v5-focus{position:relative}
+body[data-slug="同行者"] .hcw-peers-v5-eyebrow{
+  display:block;font-size:11px;letter-spacing:.22em;color:var(--peer-warm);font-weight:840
+}
+body[data-slug="同行者"] .hcw-peers-v5-section-head{display:block;max-width:1080px;margin-bottom:40px}
+body[data-slug="同行者"] .hcw-peers-v5-section-head h2{
+  font-size:clamp(34px,3vw,48px);line-height:1.12;letter-spacing:-.045em;margin:10px 0 0;color:var(--peer-ink)
+}
+body[data-slug="同行者"] .hcw-peers-v5-section-head p{
+  max-width:780px;color:var(--peer-muted);font-size:14px;line-height:1.95;margin:13px 0 0
+}
+
+/* Hero */
+body[data-slug="同行者"] .hcw-peers-v5-hero{
+  min-height:calc(100svh - 72px);display:grid;grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr);
+  gap:82px;align-items:center;padding:62px 0 72px
+}
+body[data-slug="同行者"] .hcw-peers-v5-hero h1{
+  font-size:clamp(56px,5.2vw,82px);line-height:.98;letter-spacing:-.067em;margin:14px 0 22px;color:var(--peer-ink)
+}
+body[data-slug="同行者"] .hcw-peers-v5-hero h1 span{color:var(--peer-accent)}
+body[data-slug="同行者"] .hcw-peers-v5-kicker{font-size:20px;font-weight:760;margin:0 0 15px;color:var(--peer-ink)}
+body[data-slug="同行者"] .hcw-peers-v5-copy{max-width:760px;color:var(--peer-muted);font-size:15px;line-height:2;margin:0}
+body[data-slug="同行者"] .hcw-peers-v5-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+body[data-slug="同行者"] :is(.hcw-peers-v5-primary,.hcw-peers-v5-secondary){
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;border-radius:11px;border:1px solid var(--peer-line);
+  font-size:13px;font-weight:750;cursor:pointer
+}
+body[data-slug="同行者"] .hcw-peers-v5-primary{background:var(--peer-ink);color:#142134!important}
+:root[saved-theme="light"] body[data-slug="同行者"] .hcw-peers-v5-primary{background:#24374c;color:#fff!important}
+body[data-slug="同行者"] .hcw-peers-v5-secondary{background:transparent;color:var(--peer-ink)!important}
+body[data-slug="同行者"] .hcw-peers-v5-identity{position:relative;padding:12px 0 12px 34px}
+body[data-slug="同行者"] .hcw-peers-v5-identity::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--peer-accent) 24%,var(--peer-cyan) 65%,transparent)
+}
+body[data-slug="同行者"] .hcw-peers-v5-idtop{display:flex;gap:18px;align-items:center}
+body[data-slug="同行者"] .hcw-peers-v5-avatar{
+  width:160px;
+  height:auto;
+  aspect-ratio:auto;
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  display:block;
+  flex:none;
+  background:transparent;
+  box-shadow:none;
+}
+body[data-slug="同行者"] .hcw-peers-v5-avatar img{
+  width:100%;
+  height:auto !important;
+  max-width:none;
+  aspect-ratio:auto !important;
+  object-fit:unset !important;
+  object-position:initial !important;
+  display:block;
+  border-radius:0;
+}
+body[data-slug="同行者"] .hcw-peers-v5-idtop h2{font-size:30px;margin:0 0 5px;color:var(--peer-ink)}
+body[data-slug="同行者"] .hcw-peers-v5-idtop p{color:var(--peer-muted);font-size:12px;line-height:1.75;margin:0}
+body[data-slug="同行者"] .hcw-peers-v5-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+body[data-slug="同行者"] .hcw-peers-v5-tags span{
+  font-size:10px;color:var(--peer-muted);padding:6px 9px;border:1px solid var(--peer-line);border-radius:999px
+}
+body[data-slug="同行者"] .hcw-peers-v5-idnote{max-width:430px;color:var(--peer-muted);font-size:12px;line-height:1.9;margin:20px 0 0}
+
+/* Services: line-led layout instead of card grid */
+body[data-slug="同行者"] .hcw-peers-v5-service>article{
+  display:grid;grid-template-columns:118px minmax(0,1fr) 330px;gap:30px;min-height:194px;padding:32px 8px 32px 0;
+  position:relative;align-items:start;transition:.2s
+}
+body[data-slug="同行者"] .hcw-peers-v5-service>article::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,rgba(145,169,255,.27),rgba(126,199,192,.18) 55%,transparent)
+}
+body[data-slug="同行者"] .hcw-peers-v5-service>article:last-child::after{display:none}
+body[data-slug="同行者"] .hcw-peers-v5-service>article:hover{transform:translateX(4px)}
+body[data-slug="同行者"] .hcw-peers-v5-snum{font-size:11px;letter-spacing:.16em;color:var(--peer-accent);font-weight:820;padding-top:5px}
+body[data-slug="同行者"] .hcw-peers-v5-service-main h3{font-size:25px;line-height:1.35;margin:0 0 9px;color:var(--peer-ink)}
+body[data-slug="同行者"] .hcw-peers-v5-service-main>p{margin:0;color:var(--peer-muted);font-size:14px;line-height:1.85;max-width:760px}
+body[data-slug="同行者"] .hcw-peers-v5-expand{margin-top:14px;border:0;background:none;color:var(--peer-accent)!important;font-size:11px;font-weight:760;padding:0;cursor:pointer}
+body[data-slug="同行者"] .hcw-peers-v5-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s ease}
+body[data-slug="同行者"] .hcw-peers-v5-detail>div{overflow:hidden}
+body[data-slug="同行者"] .hcw-peers-v5-service>article.open .hcw-peers-v5-detail{grid-template-rows:1fr}
+body[data-slug="同行者"] .hcw-peers-v5-detail ul{
+  margin:18px 0 0;padding:18px 0 0 18px;border-top:1px solid var(--peer-line2);color:var(--peer-muted);font-size:12px;line-height:1.8
+}
+body[data-slug="同行者"] .hcw-peers-v5-detail li{margin:6px 0}
+body[data-slug="同行者"] .hcw-peers-v5-service-meta{display:grid;grid-template-rows:repeat(3,minmax(48px,auto));align-content:start}
+body[data-slug="同行者"] .hcw-peers-v5-service-meta>div{display:flex;flex-direction:column;justify-content:center;padding:8px 0;border-bottom:1px solid var(--peer-line2)}
+body[data-slug="同行者"] .hcw-peers-v5-service-meta>div:last-child{border-bottom:0}
+body[data-slug="同行者"] .hcw-peers-v5-service-meta b{display:block;font-size:10px;letter-spacing:.07em;margin-bottom:4px}
+body[data-slug="同行者"] .hcw-peers-v5-service-meta span{font-size:12px;color:var(--peer-muted);line-height:1.65}
+
+/* Price */
+body[data-slug="同行者"] .hcw-peers-v5-price{margin-top:38px;padding-top:28px;border-top:1px solid var(--peer-line2)}
+body[data-slug="同行者"] .hcw-peers-v5-price>button{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;background:none;border:0;padding:0;width:100%;text-align:left
+}
+body[data-slug="同行者"] .hcw-peers-v5-price>button small{display:block;font-size:10px;letter-spacing:.18em;color:var(--peer-warm);font-style:normal;font-weight:800}
+body[data-slug="同行者"] .hcw-peers-v5-price>button strong{display:block;font-size:20px;margin-top:6px}
+body[data-slug="同行者"] .hcw-peers-v5-price>button em{margin:0;color:var(--peer-muted);font-size:11px;max-width:520px;font-style:normal}
+body[data-slug="同行者"] .hcw-peers-v5-price-content{display:grid;grid-template-rows:0fr;transition:.32s}
+body[data-slug="同行者"] .hcw-peers-v5-price-content>div{overflow:hidden}
+body[data-slug="同行者"] .hcw-peers-v5-price.open .hcw-peers-v5-price-content{grid-template-rows:1fr}
+body[data-slug="同行者"] .hcw-peers-v5-price table{width:100%;border-collapse:collapse;margin-top:22px;font-size:12px}
+body[data-slug="同行者"] .hcw-peers-v5-price th,
+body[data-slug="同行者"] .hcw-peers-v5-price td{text-align:left;padding:12px 10px;border-top:1px solid var(--peer-line2)}
+body[data-slug="同行者"] .hcw-peers-v5-price th{color:var(--peer-soft);font-size:10px;letter-spacing:.08em}
+body[data-slug="同行者"] .hcw-peers-v5-price-content p{color:var(--peer-soft);font-size:10px;margin:12px 0 0}
+
+/* Process */
+body[data-slug="同行者"] .hcw-peers-v5-process{position:relative;display:grid;grid-template-columns:repeat(5,1fr);padding-top:18px}
+body[data-slug="同行者"] .hcw-peers-v5-process::before{
+  content:"";position:absolute;left:4%;right:4%;top:34px;height:1px;background:linear-gradient(90deg,transparent,var(--peer-accent) 12%,var(--peer-cyan) 52%,var(--peer-warm) 88%,transparent)
+}
+body[data-slug="同行者"] .hcw-peers-v5-process>div{padding-right:30px;position:relative}
+body[data-slug="同行者"] .hcw-peers-v5-process b{
+  position:relative;z-index:2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:var(--base,#101b29);border:1px solid var(--peer-line);font-size:10px
+}
+body[data-slug="同行者"] .hcw-peers-v5-process h3{font-size:14px;margin:17px 0 7px;color:var(--peer-ink)}
+body[data-slug="同行者"] .hcw-peers-v5-process p{font-size:12px;color:var(--peer-muted);line-height:1.75;margin:0}
+
+/* Records */
+body[data-slug="同行者"] .hcw-peers-v5-record-stack{display:grid;gap:58px;width:100%}
+body[data-slug="同行者"] .hcw-peers-v5-record-stack>section{width:100%;min-width:0}
+body[data-slug="同行者"] .hcw-peers-v5-record-stack h3{font-size:26px;line-height:1.35;margin:0 0 10px;color:var(--peer-ink)}
+body[data-slug="同行者"] .hcw-peers-v5-subline{color:var(--peer-muted);font-size:13px;line-height:1.8;margin:0 0 22px}
+body[data-slug="同行者"] .hcw-peers-v5-table-wrap{overflow:auto}
+body[data-slug="同行者"] .hcw-peers-v5-record-table{width:100%;border-collapse:collapse;table-layout:fixed;min-width:980px;font-size:11px}
+body[data-slug="同行者"] .hcw-peers-v5-record-table col:nth-child(1){width:8%}
+body[data-slug="同行者"] .hcw-peers-v5-record-table col:nth-child(2){width:10%}
+body[data-slug="同行者"] .hcw-peers-v5-record-table col:nth-child(3){width:28%}
+body[data-slug="同行者"] .hcw-peers-v5-record-table col:nth-child(4){width:20%}
+body[data-slug="同行者"] .hcw-peers-v5-record-table col:nth-child(5){width:18%}
+body[data-slug="同行者"] .hcw-peers-v5-record-table col:nth-child(6){width:16%}
+body[data-slug="同行者"] .hcw-peers-v5-record-table th,
+body[data-slug="同行者"] .hcw-peers-v5-record-table td{text-align:left;padding:14px 10px;border-top:1px solid var(--peer-line2);vertical-align:top;line-height:1.75}
+body[data-slug="同行者"] .hcw-peers-v5-record-table th{border-top:0;color:var(--peer-soft);font-size:9px;letter-spacing:.08em}
+body[data-slug="同行者"] .hcw-peers-v5-divider{height:1px;background:linear-gradient(90deg,transparent,var(--peer-accent) 18%,var(--peer-cyan) 58%,transparent);opacity:.6}
+
+/* Stories: transparent material + existing global hcw-atmo-ring makes all 3 flow modes work. */
+body[data-slug="同行者"] .hcw-peers-v5-story-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+body[data-slug="同行者"] .hcw-peer-story-card{
+  position:relative;min-height:220px;padding:24px 22px;border:1px solid var(--hcw-atmo-line,var(--peer-line));border-radius:20px;
+  background:rgba(var(--hcw-panel-rgb,24,34,49),var(--hcw-panel-alpha,.42));backdrop-filter:blur(15px) saturate(112%);
+  cursor:pointer;transition:.2s;text-align:left;overflow:hidden
+}
+body[data-slug="同行者"] .hcw-peer-story-card:hover{transform:translateY(-3px);border-color:rgba(149,171,255,.46)}
+body[data-slug="同行者"] .hcw-peer-story-head{display:flex;align-items:center;gap:14px}
+body[data-slug="同行者"] .hcw-peer-story-avatar{
+  width:58px;height:58px;border-radius:50%;overflow:hidden;border:1px solid var(--peer-line);background:rgba(126,153,190,.16);
+  display:grid;place-items:center;font-weight:800;flex:none
+}
+body[data-slug="同行者"] .hcw-peer-story-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+body[data-slug="同行者"] .hcw-peer-story-head strong{display:block;font-size:18px}
+body[data-slug="同行者"] .hcw-peer-story-head small{display:block;font-size:10px;color:var(--peer-soft);margin-top:4px}
+body[data-slug="同行者"] .hcw-peer-story-route{display:flex;align-items:center;gap:9px;font-size:24px;font-weight:820;letter-spacing:-.03em;margin:24px 0 8px}
+body[data-slug="同行者"] .hcw-peer-story-route i{font-style:normal;color:var(--peer-accent)}
+body[data-slug="同行者"] .hcw-peer-story-meta{font-size:11px;color:var(--peer-muted)}
+body[data-slug="同行者"] .hcw-peer-story-more{position:absolute;right:20px;bottom:18px;font-size:10px;color:var(--peer-accent)}
+
+/* Feedback */
+body[data-slug="同行者"] .hcw-peers-v5-feedback-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 30px}
+body[data-slug="同行者"] .hcw-peers-v5-feedback-grid article{padding-left:18px;border-left:1px solid var(--peer-line);min-height:168px}
+body[data-slug="同行者"] .hcw-peers-v5-feedback-grid article>span{font:700 32px/1 Georgia,serif;color:var(--peer-accent);opacity:.72}
+body[data-slug="同行者"] .hcw-peers-v5-feedback-grid p{font-size:12px;color:var(--peer-muted);line-height:1.9;margin:4px 0 12px}
+body[data-slug="同行者"] .hcw-peers-v5-feedback-grid small{font-size:9px;color:var(--peer-soft)}
+
+/* FAQ */
+body[data-slug="同行者"] .hcw-peers-v5-faqs{max-width:1120px}
+body[data-slug="同行者"] .hcw-peers-v5-faqs details::after{
+  content:"";display:block;height:1px;background:linear-gradient(90deg,var(--peer-line),rgba(126,199,192,.13),transparent)
+}
+body[data-slug="同行者"] .hcw-peers-v5-faqs summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:20px 0;font-size:15px;font-weight:740
+}
+body[data-slug="同行者"] .hcw-peers-v5-faqs summary::-webkit-details-marker{display:none}
+body[data-slug="同行者"] .hcw-peers-v5-faqs summary b{font-size:22px;color:var(--peer-accent);font-weight:500;transition:transform .2s}
+body[data-slug="同行者"] .hcw-peers-v5-faqs details[open] summary b{transform:rotate(45deg)}
+body[data-slug="同行者"] .hcw-peers-v5-faqs details>p{
+  max-width:930px;padding:0 0 22px;color:var(--peer-muted);font-size:13px;line-height:1.9;margin:0
+}
+
+/* Contact */
+body[data-slug="同行者"] .hcw-peers-v5-contact{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:36px;align-items:center;padding:18px 0 8px}
+body[data-slug="同行者"] .hcw-peers-v5-contact-main{display:flex;gap:20px;align-items:center}
+body[data-slug="同行者"] .hcw-peers-v5-contact .hcw-peers-v5-avatar{width:72px;height:72px}
+body[data-slug="同行者"] .hcw-peers-v5-contact h2{font-size:clamp(26px,2.2vw,34px);margin:3px 0 7px;color:var(--peer-ink)}
+body[data-slug="同行者"] .hcw-peers-v5-contact p{margin:0;color:var(--peer-muted);font-size:13px;line-height:1.85;max-width:720px}
+body[data-slug="同行者"] .hcw-peers-v5-contact small{display:block;color:var(--peer-soft);font-size:10px;margin-top:14px}
+body[data-slug="同行者"] .hcw-peers-v5-contact-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+
+/* Dialog */
+.hcw-peer-v5-dialog{
+  width:min(760px,calc(100vw - 28px));max-height:86vh;overflow:auto;border:1px solid var(--hcw-atmo-line,rgba(219,231,247,.16));
+  border-radius:24px;background:#141d2a;color:#edf2fa;box-shadow:0 28px 90px rgba(0,0,0,.36);padding:28px
+}
+:root[saved-theme="light"] .hcw-peer-v5-dialog{background:#f8fbfe;color:#233548}
+.hcw-peer-v5-dialog::backdrop{background:rgba(6,10,17,.58);backdrop-filter:blur(10px)}
+.hcw-peer-v5-dialog-close{float:right;width:36px;height:36px;border-radius:50%;border:1px solid rgba(160,180,205,.2);background:transparent;cursor:pointer}
+.hcw-peer-v5-dialog h2{font-size:28px;margin:8px 0 0}
+.hcw-peer-v5-dialog-route{font-size:28px;font-weight:820;margin:24px 0 18px}
+.hcw-peer-v5-dialog-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0}
+.hcw-peer-v5-dialog-grid>div{padding-top:12px;border-top:1px solid rgba(160,180,205,.14)}
+.hcw-peer-v5-dialog-grid dt{font-size:10px;font-weight:780;letter-spacing:.08em}
+.hcw-peer-v5-dialog-grid dd{margin:5px 0 0;font-size:12px;color:#aebaca;line-height:1.85}
+:root[saved-theme="light"] .hcw-peer-v5-dialog-grid dd{color:#64778b}
+.hcw-peer-v5-dialog-story{font-size:12px;line-height:1.9;color:#aebaca;margin:24px 0 0}
+:root[saved-theme="light"] .hcw-peer-v5-dialog-story{color:#64778b}
+.hcw-peer-v5-toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);opacity:0;pointer-events:none;z-index:180;
+  padding:9px 13px;border-radius:999px;background:#182231;border:1px solid rgba(219,231,247,.16);color:#edf2fa;font-size:11px;transition:.2s
+}
+.hcw-peer-v5-toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Responsive */
+@media(max-width:1120px){
+  body[data-slug="同行者"] .hcw-peers-v5{--peer-page:calc(100vw - 34px);--peer-rail:152px;--peer-gap:24px}
+  body[data-slug="同行者"] .hcw-peers-v5-hero{gap:46px}
+  body[data-slug="同行者"] .hcw-peers-v5-service>article{grid-template-columns:84px minmax(0,1fr)}
+  body[data-slug="同行者"] .hcw-peers-v5-service-meta{grid-column:2;grid-template-columns:repeat(3,1fr);grid-template-rows:auto;margin-top:8px}
+  body[data-slug="同行者"] .hcw-peers-v5-story-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:860px){
+  body[data-slug="同行者"] .hcw-peers-v5{--peer-page:calc(100vw - 28px)}
+  body[data-slug="同行者"] .hcw-peers-v5-shell{display:block}
+  body[data-slug="同行者"] .hcw-peers-v5-rail{
+    position:sticky;top:0;z-index:70;height:auto;margin:0 -14px;background:color-mix(in srgb,var(--light) 90%,transparent);
+    backdrop-filter:blur(16px);overflow:auto
+  }
+  body[data-slug="同行者"] .hcw-peers-v5-timeline{display:flex;padding:7px 14px;width:max-content;min-width:100%}
+  body[data-slug="同行者"] .hcw-peers-v5-timeline::before{display:none}
+  body[data-slug="同行者"] .hcw-peers-v5-timeline a{padding:7px 11px 7px 22px;white-space:nowrap}
+  body[data-slug="同行者"] .hcw-peers-v5-timeline a::before{left:8px;top:14px;width:7px;height:7px}
+  body[data-slug="同行者"] .hcw-peers-v5-timeline small{display:none}
+  body[data-slug="同行者"] .hcw-peers-v5-timeline strong{font-size:10px}
+  body[data-slug="同行者"] .hcw-peers-v5-section{padding:64px 0}
+  body[data-slug="同行者"] .hcw-peers-v5-hero{min-height:auto;grid-template-columns:1fr;gap:32px;padding:52px 0 64px}
+  body[data-slug="同行者"] .hcw-peers-v5-hero h1{font-size:58px}
+  body[data-slug="同行者"] .hcw-peers-v5-identity{max-width:620px}
+  body[data-slug="同行者"] .hcw-peers-v5-service>article{grid-template-columns:58px minmax(0,1fr);gap:14px}
+  body[data-slug="同行者"] .hcw-peers-v5-service-meta{grid-column:2;grid-template-columns:1fr}
+  body[data-slug="同行者"] .hcw-peers-v5-process{grid-template-columns:1fr}
+  body[data-slug="同行者"] .hcw-peers-v5-process::before{left:16px;right:auto;top:18px;bottom:18px;width:1px;height:auto}
+  body[data-slug="同行者"] .hcw-peers-v5-process>div{display:grid;grid-template-columns:48px 1fr;padding:0 0 22px}
+  body[data-slug="同行者"] .hcw-peers-v5-process b{grid-row:1/3}
+  body[data-slug="同行者"] .hcw-peers-v5-process h3,
+  body[data-slug="同行者"] .hcw-peers-v5-process p{grid-column:2}
+  body[data-slug="同行者"] .hcw-peers-v5-process h3{margin:0 0 5px}
+  body[data-slug="同行者"] .hcw-peers-v5-story-grid,
+  body[data-slug="同行者"] .hcw-peers-v5-feedback-grid{grid-template-columns:1fr}
+  body[data-slug="同行者"] .hcw-peers-v5-contact{grid-template-columns:1fr}
+  body[data-slug="同行者"] .hcw-peers-v5-contact-actions{justify-content:flex-start}
+}
+@media(max-width:540px){
+  body[data-slug="同行者"] .hcw-peers-v5{--peer-page:calc(100vw - 24px)}
+  body[data-slug="同行者"] .hcw-peers-v5-hero h1{font-size:47px}
+  body[data-slug="同行者"] .hcw-peers-v5-kicker{font-size:16px}
+  body[data-slug="同行者"] .hcw-peers-v5-copy{font-size:13px}
+  body[data-slug="同行者"] .hcw-peers-v5-identity{padding-left:22px}
+  body[data-slug="同行者"] .hcw-peers-v5-avatar{width:112px;height:auto}
+  body[data-slug="同行者"] .hcw-peers-v5-service>article{grid-template-columns:1fr;padding:26px 0}
+  body[data-slug="同行者"] .hcw-peers-v5-service-meta{grid-column:1}
+  body[data-slug="同行者"] .hcw-peers-v5-section-head h2{font-size:34px}
+  .hcw-peer-v5-dialog-grid{grid-template-columns:1fr}
+  body[data-slug="同行者"] .hcw-peers-v5-contact-main{align-items:flex-start}
+  body[data-slug="同行者"] .hcw-peers-v5-contact-actions{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  body[data-slug="同行者"] .hcw-peers-v5 *{scroll-behavior:auto!important;transition:none!important}
+}
+
+
+/* V7: preserve the complete square H.cw avatar instead of circularly cropping it. */
+body[data-slug="同行者"] .hcw-peers-v5-contact .hcw-peers-v5-avatar{
+  width:96px;
+  height:auto;
+  border-radius:0;
+  overflow:visible;
+}
