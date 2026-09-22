@@ -75,7 +75,7 @@ const Body: QuartzComponent = ({ children, ctx, cfg, fileData }: QuartzComponent
       </nav>
       <div id="quartz-body">{children}</div>
       {/* Local student carousel: works both in preview and under /Pro/ on GitHub Pages. */}
-      <script src={`${prefix}/static/hcw-peers.js`} defer></script>
+      <script src={`${prefix}/static/hcw-peers-v5-live-20260922.js`} defer></script>
       <script src={`${prefix}/static/hcw-follow.js`} defer></script>
       <script src={`${prefix}/static/hcw-library-reader-clean.js`} defer></script>
       <script src={`${prefix}/static/hcw-site-bg.js`} defer></script>
