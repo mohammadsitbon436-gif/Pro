@@ -2,12 +2,12 @@
 (() => {
   // 仅在此处填写本人愿意公开的信息；留空时沿用“链接待添加”占位样式。
   const CONFIG = {
-    avatar: "",
-    github: "",
+    avatar: "hcw-avatar.webp",
+    github: "https://github.com/prohcw",
     bilibili: "",
     xiaohongshu: "",
     zhihu: "",
-    email: ""
+    email: "Hcw1021@mail.ustc.edu.cn"
   };
   const icons = {
     github: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8A11.2 11.2 0 0 0 8.46 22.63c.56.11.77-.24.77-.54v-2.07c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.68.08-.68 1.13.08 1.73 1.16 1.73 1.16 1 .1 1.74-.72 2.13-1.1.1-.72.39-1.21.7-1.49-2.5-.29-5.14-1.25-5.14-5.53 0-1.22.44-2.21 1.15-2.99-.12-.29-.5-1.42.11-2.96 0 0 .94-.3 3.08 1.14a10.7 10.7 0 0 1 5.6 0C16.57 4 17.5 4.3 17.5 4.3c.61 1.54.23 2.67.12 2.96.71.78 1.14 1.77 1.14 2.99 0 4.29-2.64 5.24-5.16 5.52.4.35.76 1.04.76 2.1v3.12c0 .3.2.66.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg>',
@@ -64,9 +64,9 @@
     });
     if (CONFIG.avatar.trim()) {
       const img = document.createElement('img');
-      const base = document.body.dataset.basepath || '';
+      const base = document.querySelector('.hcw-site-nav .hcw-brand')?.href || new URL('./', location.href).href;
       const avatarPath = CONFIG.avatar.trim();
-      img.src = /^(https?:)?\/\//i.test(avatarPath) || avatarPath.startsWith('/') ? avatarPath : base + '/static/' + avatarPath.replace(/^\.?\//, '');
+      img.src = /^(https?:)?\/\//i.test(avatarPath) || avatarPath.startsWith('/') ? avatarPath : new URL('static/' + avatarPath.replace(/^\.?\//, ''), base).href;
       img.alt = 'H.cw 的头像';
       root.querySelector('#avatar')?.replaceChildren(img);
     }
