@@ -1,0 +1,342 @@
+/* H.cw atmosphere V2 · imported once from existing custom.scss.
+   Original layout, reader widths, body renderer and Quartz darkmode are untouched. */
+:root[data-hcw-background]{
+  --hcw-panel-alpha:.42;--hcw-inner-alpha:.328;--hcw-article-alpha:.56;
+  --hcw-compact-alpha:.55;
+  --hcw-panel-rgb:24,34,49;--hcw-inner-rgb:40,53,72;
+  --hcw-atmo-line:rgba(215,230,247,.17);
+  --hcw-flow-white:rgba(234,235,255,.95);
+  --hcw-flow-violet:rgba(183,157,255,.82);
+  --hcw-flow-cyan:rgba(145,221,235,.51);
+  --hcw-flow-strength:.82;--hcw-flow-glow:.32;--hcw-flow-speed:10s;
+  background-color:var(--base,#151d28);
+}
+:root[data-hcw-background][saved-theme="light"]{
+  --hcw-panel-rgb:251,253,255;--hcw-inner-rgb:225,237,248;
+  --hcw-atmo-line:rgba(63,91,130,.18);
+  --hcw-flow-white:rgba(100,104,174,.78);
+  --hcw-flow-violet:rgba(119,91,196,.74);
+  --hcw-flow-cyan:rgba(60,142,181,.46);
+  --hcw-flow-strength:.70;--hcw-flow-glow:.23;
+  background-color:var(--base,#f3f7fb);
+}
+:root[data-hcw-flow="vivid"]{--hcw-flow-strength:1;--hcw-flow-glow:.56;--hcw-flow-speed:6s}
+:root[data-hcw-flow="off"]{--hcw-flow-strength:0;--hcw-flow-glow:0}
+/* The scenery is painted ONCE for the viewport, never on individual scenes. */
+:root[data-hcw-background] body{background:transparent!important;isolation:isolate}
+:root[data-hcw-background] body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-color:var(--base,#151d28);
+  background-image:
+    radial-gradient(ellipse 69vw 69vh at 49% 46%,var(--glow1) 0%,var(--glow1b) 34%,transparent 100%),
+    radial-gradient(ellipse 65vw 68vh at 21% 78%,var(--glow2) 0%,var(--glow2b) 36%,transparent 100%),
+    radial-gradient(ellipse 65vw 75vh at 83% 19%,var(--glow3) 0%,var(--glow3b) 38%,transparent 100%),
+    radial-gradient(ellipse 69vw 87vh at 77% 91%,var(--glow4) 0%,transparent 100%),
+    radial-gradient(ellipse 120vw 120vh at 50% 50%,transparent 5%,var(--vignette) 100%);
+  background-size:cover;background-position:center;
+}
+/* A second veil is fixed to the same viewport; it softly joins color regions.
+   There is no per-page/per-section gradient or scroll-linked animation. */
+:root[data-hcw-background] body::after{
+  content:"";position:fixed;inset:-12%;z-index:-1;pointer-events:none;
+  opacity:.62;filter:blur(78px);
+  background-image:
+    radial-gradient(ellipse 55% 56% at 38% 36%,var(--veil1),transparent 100%),
+    radial-gradient(ellipse 55% 58% at 68% 68%,var(--veil2),transparent 100%);
+}
+:root[data-hcw-background="mist"]:not([saved-theme="light"]) {
+ --base:#151d28;
+ --glow1:rgba(107,159,154,.22);--glow1b:rgba(104,153,154,.095);
+ --glow2:rgba(78,116,175,.25);--glow2b:rgba(75,111,173,.085);
+ --glow3:rgba(181,146,102,.14);--glow3b:rgba(166,140,113,.045);
+ --glow4:rgba(95,118,166,.12);
+ --veil1:rgba(140,177,169,.12);--veil2:rgba(115,138,175,.09);
+ --vignette:rgba(10,15,23,.30)
+}
+:root[data-hcw-background="mist"][saved-theme="light"] {
+ --base:#f3f7fb;
+ --glow1:rgba(122,188,177,.22);--glow1b:rgba(122,188,177,.09);
+ --glow2:rgba(132,168,216,.24);--glow2b:rgba(132,168,216,.075);
+ --glow3:rgba(239,202,148,.18);--glow3b:rgba(239,202,148,.055);
+ --glow4:rgba(159,176,217,.12);
+ --veil1:rgba(166,213,202,.13);--veil2:rgba(172,187,224,.09);
+ --vignette:rgba(219,231,242,.21)
+}
+:root[data-hcw-background="ocean"]:not([saved-theme="light"]) {
+ --base:#101b29;
+ --glow1:rgba(73,139,162,.25);--glow1b:rgba(73,139,162,.105);
+ --glow2:rgba(62,101,172,.27);--glow2b:rgba(62,101,172,.075);
+ --glow3:rgba(73,137,150,.17);--glow3b:rgba(73,137,150,.06);
+ --glow4:rgba(81,110,178,.14);
+ --veil1:rgba(90,159,166,.12);--veil2:rgba(80,112,180,.10);
+ --vignette:rgba(7,13,24,.32)
+}
+:root[data-hcw-background="ocean"][saved-theme="light"] {
+ --base:#f2f7fb;
+ --glow1:rgba(137,193,206,.24);--glow1b:rgba(137,193,206,.095);
+ --glow2:rgba(135,164,219,.24);--glow2b:rgba(135,164,219,.09);
+ --glow3:rgba(164,212,207,.16);--glow3b:rgba(164,212,207,.055);
+ --glow4:rgba(159,183,225,.14);
+ --veil1:rgba(156,210,209,.14);--veil2:rgba(156,175,217,.11);
+ --vignette:rgba(218,230,243,.17)
+}
+:root[data-hcw-background="champagne"]:not([saved-theme="light"]) {
+ --base:#1d222a;
+ --glow1:rgba(141,154,165,.12);--glow1b:rgba(141,154,165,.06);
+ --glow2:rgba(100,120,151,.18);--glow2b:rgba(100,120,151,.075);
+ --glow3:rgba(190,159,113,.19);--glow3b:rgba(190,159,113,.06);
+ --glow4:rgba(129,149,161,.09);
+ --veil1:rgba(157,168,167,.08);--veil2:rgba(157,148,138,.08);
+ --vignette:rgba(12,15,19,.26)
+}
+:root[data-hcw-background="champagne"][saved-theme="light"] {
+ --base:#f7f6f2;
+ --glow1:rgba(178,189,193,.15);--glow1b:rgba(178,189,193,.06);
+ --glow2:rgba(152,173,193,.16);--glow2b:rgba(152,173,193,.055);
+ --glow3:rgba(226,202,164,.23);--glow3b:rgba(226,202,164,.075);
+ --glow4:rgba(184,201,207,.10);
+ --veil1:rgba(189,202,199,.09);--veil2:rgba(215,203,186,.11);
+ --vignette:rgba(223,221,216,.15)
+}
+:root[data-hcw-background="aurora"]:not([saved-theme="light"]) {
+ --base:#171b2a;
+ --glow1:rgba(116,131,195,.24);--glow1b:rgba(116,131,195,.085);
+ --glow2:rgba(88,151,173,.22);--glow2b:rgba(88,151,173,.075);
+ --glow3:rgba(148,123,176,.20);--glow3b:rgba(148,123,176,.06);
+ --glow4:rgba(113,154,183,.12);
+ --veil1:rgba(158,152,204,.11);--veil2:rgba(116,167,176,.11);
+ --vignette:rgba(12,14,25,.27)
+}
+:root[data-hcw-background="aurora"][saved-theme="light"] {
+ --base:#f5f6fb;
+ --glow1:rgba(168,182,229,.22);--glow1b:rgba(168,182,229,.09);
+ --glow2:rgba(152,204,215,.20);--glow2b:rgba(152,204,215,.085);
+ --glow3:rgba(207,181,220,.20);--glow3b:rgba(207,181,220,.06);
+ --glow4:rgba(168,199,220,.10);
+ --veil1:rgba(192,193,229,.11);--veil2:rgba(157,210,210,.10);
+ --vignette:rgba(228,229,243,.14)
+}
+/* Mountain uses the same fixed canvas and existing locally hosted photo. */
+:root[data-hcw-background="mountain"]{
+  --base:#101927;
+  --hcw-panel-rgb:19,30,43;--hcw-inner-rgb:32,48,65;
+}
+:root[data-hcw-background="mountain"][saved-theme="light"]{
+  --base:#eaf1f8;--hcw-panel-rgb:251,253,255;--hcw-inner-rgb:225,237,248;
+}
+:root[data-hcw-background="mountain"] body::before{
+  background-image:
+    linear-gradient(105deg,rgba(15,26,40,.44),rgba(16,30,44,.23)),
+    var(--hcw-mountain-url,linear-gradient(145deg,#536a84,#9bafc2));
+}
+:root[data-hcw-background="mountain"][saved-theme="light"] body::before{
+  background-image:
+    linear-gradient(110deg,rgba(245,249,254,.44),rgba(235,244,254,.35)),
+    var(--hcw-mountain-url,linear-gradient(145deg,#d7e4ef,#adbecc));
+}
+/* A photo never receives the color-veil layer. */
+:root[data-hcw-background="mountain"] body::after{display:none!important}
+/* Retire per-page glow layers. Keep ALL existing typography and interactions. */
+:root[data-hcw-background] body[data-slug="index"] .hcw-home,
+:root[data-hcw-background] body[data-slug="关注我"] .follow-page,
+:root[data-hcw-background] body[data-slug="about"] .hcw-about-v2,
+:root[data-hcw-background] body[data-slug="同行者"] .hcw-peers{
+  background:transparent!important;
+}
+:root[data-hcw-background] body[data-slug="index"] .hcw-home::before,
+:root[data-hcw-background] body[data-slug="index"] .hcw-home::after,
+:root[data-hcw-background] body[data-slug="关注我"] .follow-page::before,
+:root[data-hcw-background] body[data-slug="关注我"] .follow-page::after{display:none!important}
+/* Preserve home text contrast in both themes independently of palette. */
+:root[data-hcw-background][saved-theme="light"] body[data-slug="index"] .hcw-home{
+  color:#1c2b3e!important;
+}
+:root[data-hcw-background]:not([saved-theme="light"]) body[data-slug="index"] .hcw-home{
+  color:#f1f5fb!important;
+}
+/* Quartz library's base surface tokens also update all nested controls. */
+:root[data-hcw-background] body:is([data-slug="系列笔记"],.hcw-library-volume-page,.hcw-library-note-page){
+  --hcw-lb-panel:rgba(var(--hcw-panel-rgb),var(--hcw-panel-alpha));
+  --hcw-lb-panel-2:rgba(var(--hcw-inner-rgb),var(--hcw-inner-alpha));
+  --hcw-lb-line:var(--hcw-atmo-line);
+  --hcw-lb-shadow:0 18px 48px rgba(4,12,27,.10);
+}
+/* The main panel / nested cards / reading area use separate but linked alpha values. */
+:root[data-hcw-background] body .hcw-atmo-panel:not(.hcw-library-book){
+  background:rgba(var(--hcw-panel-rgb),var(--hcw-panel-alpha))!important;
+  border-color:var(--hcw-atmo-line)!important;
+  -webkit-backdrop-filter:blur(19px) saturate(110%);
+  backdrop-filter:blur(19px) saturate(110%);
+}
+:root[data-hcw-background] body .hcw-atmo-panel[data-hcw-material="inner"]{
+  background:rgba(var(--hcw-inner-rgb),var(--hcw-inner-alpha))!important;
+}
+:root[data-hcw-background] body .hcw-atmo-panel[data-hcw-material="reader"]{
+  background:rgba(var(--hcw-panel-rgb),var(--hcw-article-alpha))!important;
+  -webkit-backdrop-filter:blur(24px) saturate(110%);
+  backdrop-filter:blur(24px) saturate(110%);
+}
+:root[data-hcw-background] body .hcw-atmo-panel.hcw-library-book{
+  -webkit-backdrop-filter:blur(15px) saturate(115%);
+  backdrop-filter:blur(15px) saturate(115%);
+}
+/* Personal header stays readable without border animation. */
+:root[data-hcw-background] body[data-slug="about"] .hcw-about-v2 .compact-identity{
+  background:linear-gradient(180deg,
+    rgba(var(--hcw-panel-rgb),var(--hcw-compact-alpha)) 0%,
+    rgba(var(--hcw-panel-rgb),calc(var(--hcw-compact-alpha) * .78)) 70%,
+    transparent 100%)!important;
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+}
+/* Avoid a solid peer-section background masking the shared scenery. */
+:root[data-hcw-background] body[data-slug="同行者"] .hcw-peers #support.hcw-support-section{
+  background:rgba(var(--hcw-panel-rgb),var(--hcw-panel-alpha))!important;
+}
+/* Follow controls retain their original clickability and theme contrast. */
+:root[data-hcw-background] body[data-slug="关注我"] .follow-page .social-card{
+  border-color:var(--hcw-atmo-line)!important;
+}
+/* Unified border-flow: standalone child prevents overriding existing card artwork
+   in ::before and ::after (especially About and peer cards). */
+:root[data-hcw-background] body .hcw-atmo-panel{border-color:var(--hcw-atmo-line);}
+:root[data-hcw-background] body .hcw-atmo-ring{
+  position:absolute;inset:0;border-radius:inherit;display:block;
+  z-index:3;pointer-events:none;overflow:visible;
+}
+@property --hcw-flow-angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes hcw-flow-orbit{to{--hcw-flow-angle:360deg}}
+:root[data-hcw-background] body .hcw-atmo-ring::before,
+:root[data-hcw-background] body .hcw-atmo-ring::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  pointer-events:none;box-sizing:border-box;padding:1.35px;
+  background:conic-gradient(from var(--hcw-flow-angle),transparent 0deg,transparent 211deg,
+    var(--hcw-flow-cyan) 239deg,var(--hcw-flow-violet) 264deg,
+    var(--hcw-flow-white) 283deg,var(--hcw-flow-violet) 304deg,transparent 336deg,transparent 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  animation:hcw-flow-orbit var(--hcw-flow-speed) linear infinite;
+}
+:root[data-hcw-background] body .hcw-atmo-ring::before{opacity:var(--hcw-flow-strength)}
+:root[data-hcw-background] body .hcw-atmo-ring::after{opacity:var(--hcw-flow-glow);padding:3px;filter:blur(7px)}
+:root[data-hcw-flow="off"] body .hcw-atmo-ring::before,
+:root[data-hcw-flow="off"] body .hcw-atmo-ring::after{content:none;display:none;animation:none}
+@media(prefers-reduced-motion:reduce){
+  :root[data-hcw-background] body .hcw-atmo-ring::before,
+  :root[data-hcw-background] body .hcw-atmo-ring::after{animation:none!important}
+}
+/* Existing nav is reused. Background atmosphere lives to the RIGHT of Quartz theme. */
+.hcw-atmo-control{position:relative;flex:0 0 auto;z-index:151}
+.hcw-atmo-toggle{
+  border:1px solid var(--lightgray);background:var(--highlight);color:var(--dark)!important;
+  border-radius:11px;min-height:38px;padding:0 12px;cursor:pointer;
+  font:650 12px/1 "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;white-space:nowrap;
+}
+.hcw-atmo-toggle:hover{border-color:var(--gray)}
+.hcw-atmo-toggle:focus-visible,.hcw-atmo-menu button:focus-visible,
+.hcw-atmo-menu input:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
+.hcw-atmo-menu{
+  box-sizing:border-box;position:absolute;right:0;top:calc(100% + 11px);
+  width:min(360px,calc(100vw - 28px));max-height:min(80vh,730px);overflow:auto;
+  padding:18px;border:1px solid var(--hcw-atmo-line);border-radius:20px;
+  background:#1c2738;color:#edf2fa;box-shadow:0 24px 90px #0006;
+  -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);
+}
+.hcw-atmo-menu[hidden]{display:none!important}
+:root[saved-theme="light"] .hcw-atmo-menu{background:#f6f9ff;color:#25384d;box-shadow:0 24px 70px #26364a26}
+.hcw-atmo-menu-head{display:flex;justify-content:space-between;align-items:start;gap:10px}
+.hcw-atmo-menu-head strong{display:block;font-size:16px}
+.hcw-atmo-menu-head small{display:block;font-size:11px;color:var(--gray);margin-top:4px}
+.hcw-atmo-close{font-size:22px;line-height:1;color:inherit;background:transparent;border:1px solid var(--hcw-atmo-line);border-radius:9px;padding:1px 8px;cursor:pointer}
+.hcw-atmo-label{display:block;margin:19px 0 9px;font-weight:800;font-size:11px;color:inherit;letter-spacing:.07em}
+.hcw-atmo-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.hcw-atmo-choices button,.hcw-atmo-flow button{
+  min-height:49px;display:flex;align-items:center;gap:7px;text-align:left;
+  border:1px solid var(--hcw-atmo-line);border-radius:12px;
+  background:#ffffff12;color:inherit;padding:8px;cursor:pointer;font-size:12px;
+}
+:root[saved-theme="light"] .hcw-atmo-choices button,
+:root[saved-theme="light"] .hcw-atmo-flow button{background:#eef2fa;color:#25384d}
+.hcw-atmo-choices button[aria-checked="true"],.hcw-atmo-flow button[aria-pressed="true"]{
+  border-color:#a5a1ed;background:#7e8fc24a;color:inherit;
+}
+.hcw-atmo-swatch{width:26px;height:26px;flex:0 0 26px;border-radius:8px;border:1px solid #ffffff2a}
+.hcw-atmo-swatch.mist{background:linear-gradient(135deg,#b99b7c,#5b8c8c,#4b6ea8)}
+.hcw-atmo-swatch.ocean{background:linear-gradient(135deg,#263e63,#4f92ab,#5b6ba8)}
+.hcw-atmo-swatch.champagne{background:linear-gradient(135deg,#333943,#b99f7b,#656f85)}
+.hcw-atmo-swatch.aurora{background:linear-gradient(135deg,#6962a5,#68a6ac,#9379a5)}
+.hcw-atmo-swatch.mountain{background:linear-gradient(135deg,#acbfd4,#eef4f9,#556b89)}
+.hcw-atmo-alpha-row{display:flex;gap:13px;align-items:center}
+.hcw-atmo-alpha-row input{width:100%;min-width:0;flex:1;accent-color:#9582e2}
+.hcw-atmo-alpha-row output{flex:0 0 40px;text-align:right;font-size:12px;font-variant-numeric:tabular-nums}
+.hcw-atmo-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.hcw-atmo-flow button{justify-content:center;min-height:37px}
+.hcw-atmo-footnote{color:inherit;font-size:11px;opacity:.72;line-height:1.7;margin:15px 0 0}
+@media(max-width:720px){
+  .hcw-atmo-toggle{font-size:11px;min-height:35px;padding:0 9px}
+  .hcw-atmo-menu{max-height:70vh}
+}
+
+/* ============================================================
+   H.cw 顶部导航：明暗切换与背景氛围水平排列
+   仅修改按钮位置，不修改原有交互
+   ============================================================ */
+
+.hcw-site-nav .hcw-nav-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+
+  flex: 0 0 auto;
+  margin-left: 12px;
+  min-width: 0;
+}
+
+/* 明暗切换按钮 */
+.hcw-site-nav .hcw-nav-actions > button.hcw-theme-toggle.darkmode {
+  flex: 0 0 auto;
+  height: 38px;
+  min-height: 38px;
+  margin: 0;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+/* 背景氛围按钮及其弹出面板 */
+.hcw-site-nav .hcw-atmo-control {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.hcw-site-nav .hcw-atmo-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 38px;
+  min-height: 38px;
+  margin: 0;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+/* 窄屏下仍保持两个按钮水平排列 */
+@media (max-width: 720px) {
+  .hcw-site-nav .hcw-nav-actions {
+    gap: 6px;
+    margin-left: auto;
+  }
+
+  .hcw-site-nav .hcw-nav-actions > button.hcw-theme-toggle.darkmode,
+  .hcw-site-nav .hcw-atmo-toggle {
+    height: 35px;
+    min-height: 35px;
+    padding: 0 9px;
+    font-size: 11px;
+  }
+}
